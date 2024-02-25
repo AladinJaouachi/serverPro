@@ -90,7 +90,7 @@ router.post("/loginuser", userloginrules(), validation, async (req, res) => {
 //
 
 // delete user method
-router.delete("/user/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const deleteduser = await user.deleteOne({ _id: req.params.id });
     res
@@ -107,7 +107,7 @@ router.delete("/user/:id", async (req, res) => {
 });
 
 // update user method
-router.patch("/user/:id", async (req, res) => {
+router.patch("/:id", async (req, res) => {
   try {
     const updateduser = await user.updateOne(
       { _id: req.params.id },

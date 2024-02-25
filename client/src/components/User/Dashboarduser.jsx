@@ -1,4 +1,5 @@
 import React from "react";
+import AddPub from "./../AddPub";
 
 const Dashboarduser = ({ setfirstuser }) => {
   const logout = () => {
@@ -8,7 +9,9 @@ const Dashboarduser = ({ setfirstuser }) => {
   return (
     <div>
       Dashboarduser
+      <br />
       <button onClick={logout}>logout</button>
+      <AddPub />
     </div>
   );
 };

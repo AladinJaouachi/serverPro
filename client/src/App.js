@@ -64,7 +64,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
 
         {/* <Route path="/RegisterX" element={<RegisterX />} /> */}
-        <Route path="/Loginadmin" element={<Login />} />
+        <Route path="/Loginadmin" element={<Login setfirst={setfirst} />} />
         <Route path="/admin" element={<Home />} />
         <Route
           path="/Dashboardadmin"
