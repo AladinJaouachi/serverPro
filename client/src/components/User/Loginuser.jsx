@@ -27,16 +27,19 @@ const Loginuser = ({ setfirstuser }) => {
       const data = await response.json();
       if (response.status === 200) {
         await localStorage.setItem("token", data.token);
+
         setfirstuser(true);
+        setbad(true);
+        console.log(data.token);
 
         console.log("connected");
-        navigator("/Dashboardadmin");
-        setbad(true);
+        navigator("/Dashboarduser");
       } else {
         console.log(data);
         seterrorses(data.errors);
         console.log("you don't have account register first");
         setbad(false);
+        setfirstuser(false);
         console.log(bad);
       }
     } catch (error) {

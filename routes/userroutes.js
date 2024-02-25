@@ -64,25 +64,27 @@ router.post(
 // login method
 router.post("/loginuser", userloginrules(), validation, async (req, res) => {
   const { email, password } = req.body;
+
   try {
-    const useremail = await user.findOne({ email: email });
-    const comparedpassword = await jwt.compare(password, useremail.password);
-    if (!useremail) {
-      res.status(400).send({ msg: "bad credential" });
-    } else if (!comparedpassword) {
-      res.status(400).send({ msg: "bad credential" });
-    } else {
-      const token = await jwt.sign(
-        { _id: useremail._id },
-        process.env.SECRET_KEY,
-        { expiresIn: 3600 }
-      );
-      res.status(200).send({
-        msg: "login user successfully",
-        Response: useremail,
-        tokenuser: token,
-      });
+    const useremail = await user.findOne({ email });
+    if (!useremail.email) {
+      return res.status(400).send({ msg: "bad credential" });
     }
+    const comparedpassword = await bcrypt.compare(password, useremail.password);
+
+    if (!comparedpassword) {
+      return res.status(400).send({ msg: "bad credential" });
+    }
+    const token = await jwt.sign(
+      { _id: useremail._id },
+      process.env.SECRET_KEY,
+      { expiresIn: 3600 }
+    );
+    return res.status(200).send({
+      msg: "login user successfully",
+      Response: useremail,
+      tokenuser: token,
+    });
   } catch (error) {
     res.status(500).send({ msg: "login user failed", Response: error });
   }

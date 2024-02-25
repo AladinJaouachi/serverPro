@@ -40,7 +40,7 @@ function App() {
   };
 
   const changefirstuser = () => {
-    const b = localStorage.getItem("tokenuser");
+    const b = localStorage.getItem("token");
     if (b) {
       setfirstuser(true);
       console.log(b);
@@ -59,7 +59,7 @@ function App() {
 
   return (
     <div className="App">
-    <h1>moslem rahou akbar sara9</h1>
+      <h1>moslem rahou akbar sara9</h1>
       {/* <Head /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -72,19 +72,22 @@ function App() {
           element={
             <ProtectedRouteadmin isAllowed={first}>
               {" "}
-              <Dashboard2 />{" "}
+              <Dashboard2 setfirst={setfirst} />{" "}
             </ProtectedRouteadmin>
           }
         />
 
-        <Route path="/Loginuser" element={<Loginuser />} />
+        <Route
+          path="/Loginuser"
+          element={<Loginuser setfirstuser={setfirstuser} />}
+        />
         <Route path="/Registeruser" element={<Registeruser />} />
         <Route
           path="/Dashboarduser"
           element={
             <ProtectedRoute isAllowed={firstuser}>
               {" "}
-              <Dashboarduser />
+              <Dashboarduser setfirstuser={setfirstuser} />
             </ProtectedRoute>
           }
         />
