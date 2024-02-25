@@ -28,16 +28,12 @@ const Loginuser = ({ setfirstuser }) => {
       if (response.status === 200) {
         await localStorage.setItem("token", data.token);
         setfirstuser(true);
-        const bb = await localStorage.getItem("token");
-        if (bb) {
-          console.log("login is ok ");
-          console.log("login success");
 
-          navigator("/Dashboardadmin");
-        } else {
-          console.log("failed");
-        }
+        console.log("connected");
+        navigator("/Dashboardadmin");
+        setbad(true);
       } else {
+        console.log(data);
         seterrorses(data.errors);
         console.log("you don't have account register first");
         setbad(false);

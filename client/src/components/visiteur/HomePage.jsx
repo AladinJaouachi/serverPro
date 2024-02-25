@@ -23,6 +23,7 @@ const HomePage = () => {
   return (
     <div>
       <Head />
+      <br />
       <h1>nouveautés</h1>
       <div className="fatherchildren">
         {" "}

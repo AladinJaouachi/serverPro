@@ -72,39 +72,39 @@ const Login = ({ setfirst }) => {
           login
         </button>
       </form> */}
-      <div class="login-wrap">
-        <div class="login-html">
-          <div class="login-form">
-            <div class="sign-in-htm">
+      <div className="login-wrap">
+        <div className="login-html">
+          <div className="login-form">
+            <div className="sign-in-htm">
               <div className="entete">login Admin</div>
-              <div class="group">
-                <label for="user" class="label">
+              <div className="group">
+                <label for="user" className="label">
                   email
                 </label>
                 <input
                   id="email"
                   type="text"
-                  class="input"
+                  className="input"
                   onChange={handlechange}
                 />
               </div>
-              <div class="group">
-                <label for="pass" class="label">
+              <div className="group">
+                <label for="pass" className="label">
                   Password
                 </label>
                 <input
                   id="password"
                   type="password"
-                  class="input"
+                  className="input"
                   data-type="password"
                   onChange={handlechange}
                 />
               </div>
 
-              <div class="group">
+              <div className="group">
                 <input
                   type="submit"
-                  class="button"
+                  className="button"
                   value="Sign In"
                   onClick={handlesubmit}
                 />
