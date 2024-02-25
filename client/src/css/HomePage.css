@@ -1,0 +1,21 @@
+.children{
+    border: 2px solid rgb(230, 230, 231);
+    box-shadow: 0 0  20px (rgb(194, 26, 26));
+}
+.children * {
+    margin: 10px auto;
+    text-align: center;
+    align-items: center;
+    margin: 10px ;
+
+}
+.children :first-child{
+    margin: auto;
+    width: 100%;
+
+}
+
+.fatherchildren * {
+    margin: 20px auto;
+
+}
