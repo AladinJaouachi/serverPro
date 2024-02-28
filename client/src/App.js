@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 import "./App.css";
-
+import "bootstrap/dist/css/bootstrap.min.css";
 import Home from "./components/admin/Home";
 
 import { Route, Routes } from "react-router-dom";
@@ -15,79 +15,39 @@ import Registeruser from "./components/User/Registeruser";
 import ProtectedRoute from "./ProtectedRoute";
 import Dashboarduser from "./components/User/Dashboarduser";
 import ProtectedRouteadmin from "./ProtectedRouteAdmin";
-// import Dashboarduser from "./components/User/Dashboarduser";
-
-// import Head from "./components/Head";
+import { useSelector } from "react-redux";
 
 function App() {
-  const [first, setfirst] = useState(false);
-  const [firstuser, setfirstuser] = useState(false);
-  // const nav1 = () => {
-  //   navigator("/Dashboarduser");
-  // };
+  const adminprivate = useSelector((state) => state.admin.value);
+  const userPrivate = useSelector((state) => state.user.value);
 
-  // const nav2 = () => {
-  //   navigator("/Loginuser");
-  // };
-  const changefirst = () => {
-    const a = localStorage.getItem("token");
-    if (a) {
-      setfirst(true);
-      console.log(a);
-    } else {
-      setfirst(false);
-    }
-  };
-
-  const changefirstuser = () => {
-    const b = localStorage.getItem("token");
-    if (b) {
-      setfirstuser(true);
-      console.log(b);
-    } else {
-      setfirstuser(false);
-    }
-  };
-
-  // console.log(first);
-  // console.log(firstuser);
-
-  useEffect(() => {
-    changefirst();
-    changefirstuser();
-  }, []);
+  console.log("adminprivate is :", adminprivate);
+  console.log("userprivate is ", userPrivate);
 
   return (
     <div className="App">
-      <h1>moslem rahou akbar sara9</h1>
-      {/* <Head /> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
-
-        {/* <Route path="/RegisterX" element={<RegisterX />} /> */}
-        <Route path="/Loginadmin" element={<Login setfirst={setfirst} />} />
+        <Route path="/Loginadmin" element={<Login />} />
         <Route path="/admin" element={<Home />} />
         <Route
           path="/Dashboardadmin"
           element={
-            <ProtectedRouteadmin isAllowed={first}>
+            <ProtectedRouteadmin isAllowed={adminprivate}>
               {" "}
-              <Dashboard2 setfirst={setfirst} />{" "}
+              <Dashboard2 />{" "}
             </ProtectedRouteadmin>
           }
         />
 
-        <Route
-          path="/Loginuser"
-          element={<Loginuser setfirstuser={setfirstuser} />}
-        />
+        <Route path="/Loginuser" element={<Loginuser />} />
         <Route path="/Registeruser" element={<Registeruser />} />
         <Route
           path="/Dashboarduser"
           element={
-            <ProtectedRoute isAllowed={firstuser}>
+            <ProtectedRoute isAllowed={userPrivate}>
               {" "}
-              <Dashboarduser setfirstuser={setfirstuser} />
+              <Dashboarduser />
             </ProtectedRoute>
           }
         />

@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import "../../css/Loginuser.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeStateUser } from "../../Redux/slice/Userslice";
 
-const Loginuser = ({ setfirstuser }) => {
+const Loginuser = () => {
+  const dispatch = useDispatch();
   const navigator = useNavigate();
   const [errorses, seterrorses] = useState([]);
   var [bad, setbad] = useState(true);
@@ -28,9 +31,9 @@ const Loginuser = ({ setfirstuser }) => {
       if (response.status === 200) {
         await localStorage.setItem("token", data.token);
 
-        setfirstuser(true);
         setbad(true);
         console.log(data.token);
+        dispatch(changeStateUser());
 
         console.log("connected");
         navigator("/Dashboarduser");
@@ -39,8 +42,7 @@ const Loginuser = ({ setfirstuser }) => {
         seterrorses(data.errors);
         console.log("you don't have account register first");
         setbad(false);
-        setfirstuser(false);
-        console.log(bad);
+        // console.log(bad);
       }
     } catch (error) {
       if (error) {

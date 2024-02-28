@@ -2,13 +2,17 @@ import React, { useEffect, useState } from "react";
 import AddPub from "./../AddPub";
 import "../../css/Dashboarduser.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { changeStateUser } from "../../Redux/slice/Userslice";
 
-const Dashboarduser = ({ setfirstuser }) => {
+const Dashboarduser = () => {
+  const dispatch = useDispatch();
   const navigator = useNavigate();
   const [pubs, setpubs] = useState([]);
   const logout = async (e) => {
     localStorage.removeItem("token");
-    setfirstuser(false);
+    dispatch(changeStateUser(false));
+
     navigator("/");
     alert("logout success ");
   };

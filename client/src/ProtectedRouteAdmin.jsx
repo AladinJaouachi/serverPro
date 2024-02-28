@@ -6,8 +6,9 @@ export default function ProtectedRouteadmin({
   redirectTo = "/Loginadmin",
   children,
 }) {
-  if (!isAllowed) {
+  if (isAllowed === false) {
     return <Navigate to={redirectTo} />;
+  } else {
+    return children ? children : <Outlet />;
   }
-  return children ? children : <Outlet />;
 }

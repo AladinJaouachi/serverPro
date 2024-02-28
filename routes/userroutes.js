@@ -83,7 +83,7 @@ router.post("/loginuser", userloginrules(), validation, async (req, res) => {
     return res.status(200).send({
       msg: "login user successfully",
       Response: useremail,
-      tokenuser: token,
+      token: token,
     });
   } catch (error) {
     res.status(500).send({ msg: "login user failed", Response: error });
