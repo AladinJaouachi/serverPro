@@ -50,57 +50,52 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div className="login-wrap">
-        <div className="login-html">
-          <div className="login-form">
-            <div className="sign-in-htm">
-              <div className="entete">login Admin</div>
-              <div className="group">
-                <label htmlFor="user" className="label">
-                  email
-                </label>
-                <input
-                  id="email"
-                  type="text"
-                  className="input"
-                  onChange={handlechange}
-                />
-              </div>
-              <div className="group">
-                <label htmlFor="pass" className="label">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  className="input"
-                  data-type="password"
-                  onChange={handlechange}
-                />
-              </div>
-
-              <div className="group">
-                <input
-                  type="submit"
-                  className="button"
-                  value="Sign In"
-                  onClick={handlesubmit}
-                />
-              </div>
-              <div className="predefinit">
-                {" "}
-                {errorses &&
-                  errorses.map((e, key) => {
-                    return <h4 key={key}>{e.msg}</h4>;
-                  })}
-              </div>
-              <div className="predefinit">
-                {bad ? null : <h3>bad credential</h3>}
-              </div>
-            </div>
-          </div>
+    <div className="loginadmin">
+      <div className="loginformchild">
+        <div className="entete">login Admin</div>
+        <div className="group">
+          <label htmlFor="user" className="label">
+            email
+          </label>
+          <input
+            id="email"
+            type="text"
+            className="input"
+            autoComplete="off"
+            placeholder="example@gmail.com"
+            onChange={handlechange}
+          />
         </div>
+        <div className="group">
+          <label htmlFor="pass" className="label">
+            Password
+          </label>
+          <input
+            id="password"
+            type="password"
+            className="input"
+            data-type="password"
+            autoComplete="off"
+            placeholder="********"
+            onChange={handlechange}
+          />
+        </div>
+        <div className="group">
+          <input
+            type="submit"
+            className="button"
+            value="Sign In"
+            onClick={handlesubmit}
+          />
+        </div>
+        <div className="predefinit">
+          {" "}
+          {errorses &&
+            errorses.map((e, key) => {
+              return <h4 key={key}>{e.msg}</h4>;
+            })}
+        </div>
+        <div className="predefinit">{bad ? null : <h3>bad credential</h3>}</div>
       </div>
     </div>
   );

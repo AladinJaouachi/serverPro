@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
-import Head from "../Head";
+
 import "../../css/HomePage.css";
+import { Link } from "react-router-dom";
+
+import Dropdown from "react-bootstrap/Dropdown";
 
 const HomePage = () => {
   const [pubs, setpubs] = useState([]);
@@ -12,7 +14,7 @@ const HomePage = () => {
           method: "GET",
         });
         const data = await res.json();
-        // console.log(data.Response);
+
         setpubs(data.Response);
       } catch (error) {
         console.log(error);
@@ -21,10 +23,55 @@ const HomePage = () => {
     getpubs();
   }, []);
   return (
-    <div>
-      <Head />
+    <div className="HomePage">
+      <navbar>
+        <ul>
+          <li>
+            {" "}
+            <Link to={"/"} style={{ textDecoration: "none" }}>
+              Home
+            </Link>
+          </li>
+          <li>
+            <Link to={"/"} style={{ textDecoration: "none" }}>
+              about
+            </Link>
+          </li>
+          <li>
+            <Link to={"/"} style={{ textDecoration: "none" }}>
+              contact us
+            </Link>
+          </li>
+        </ul>
+        <Dropdown data-bs-theme="dark">
+          <Dropdown.Toggle
+            id="dropdown-button-dark-example1"
+            variant="secondary"
+            className="btndrop"
+            style={{ height: "40px" }}
+          >
+            interfaces
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item>
+              <Link to={"/Loginadmin"}>
+                <button>interface admin </button>
+              </Link>
+            </Dropdown.Item>
+            <Dropdown.Item>
+              <Link to={"/loginuser"}>
+                <button> interface personnel </button>
+              </Link>
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </navbar>
+
       <br />
-      <h1>nouveautés</h1>
+      <center>
+        <h1>nouveautés</h1>
+      </center>
       <div className="fatherchildren">
         {" "}
         {pubs &&

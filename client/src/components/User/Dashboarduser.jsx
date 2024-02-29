@@ -23,7 +23,7 @@ const Dashboarduser = () => {
           method: "GET",
         });
         const data = await res.json();
-        // console.log(data.Response);
+
         setpubs(data.Response);
       } catch (error) {
         console.log(error);

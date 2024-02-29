@@ -1,6 +1,6 @@
 .children{
     border: 2px solid rgb(230, 230, 231);
-    box-shadow: 0 0  20px (rgb(194, 26, 26));
+   
 }
 .children * {
     margin: 10px auto;
@@ -19,3 +19,49 @@
     margin: 20px auto;
 
 }
+
+.HomePage{
+    width: 100%;
+}
+
+navbar{
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 50px;
+   
+}
+
+navbar ul{
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
+navbar ul li{
+    list-style: none;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid rgb(230, 230, 231);
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+
+}
+Link{
+    text-decoration: none;
+}
+
+
+.btndrop{
+ margin-right: 20px;
+}
+
+button{
+    width: 100%;
+    border: none;
+    height: 30px;
+    padding: 2px 5px;
+}
+

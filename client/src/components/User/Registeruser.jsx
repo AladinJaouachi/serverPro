@@ -116,6 +116,7 @@ const Registeruser = () => {
                     />
                   </div>
                   <div>
+                    <span>gender</span>
                     <select id="gender" onChange={handlechange}>
                       <option value=""></option>
                       <option value="male">male</option>
@@ -126,8 +127,9 @@ const Registeruser = () => {
                     <button id="submit" type="submit" onClick={handlesubmit}>
                       Register
                     </button>
-                    <center style={{ color: "red" }}>
-                      <div>{bad ? null : <h3>bad credential </h3>}</div>
+
+                    <center>
+                      <h4>{bad ? null : <h4>bad credential </h4>}</h4>
                     </center>
                   </div>
                 </form>

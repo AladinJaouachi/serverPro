@@ -56,7 +56,7 @@ const Loginuser = () => {
       <div className="container">
         <div className="screen">
           <div className="screen__content">
-            <form className="login">
+            <form className="loginuser">
               <h3>login user form</h3>
               <div className="login__field">
                 <i className="login__icon fas fa-user"></i>
@@ -82,8 +82,7 @@ const Loginuser = () => {
                 <div>{bad ? null : <h6>bad credential</h6>}</div>
               </center>
               <button className="button login__submit" onClick={handlesubmit}>
-                <span className="button__text">Log In Now</span>
-                <i className="button__icon fas fa-chevron-right"></i>
+                login now{" "}
               </button>
               <h5>
                 if you don't have account
