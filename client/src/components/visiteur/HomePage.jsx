@@ -69,16 +69,15 @@ const HomePage = () => {
       </navbar>
 
       <br />
-      <center>
-        <h1>nouveautés</h1>
-      </center>
+      <div>nouveautés</div>
+      <br />
       <div className="fatherchildren">
         {" "}
         {pubs &&
           pubs.map((pub) => {
             return (
               <div key={pub._id} className="children">
-                <img src={pub.image && pub.image} alt="" />
+                <img src={pub.image} alt="" />
                 <p>{pub.title} </p>
                 <p>{pub.content} </p>
               </div>

@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+}
+/* 
+html {
+    font-family: sans-serif;
+    font-weight: 300;
+    color: hsl(0 0% 15%);
+} */
+
+
+
+
+
+
+
+
+figure {
+    width: 100%;
+    aspect-ratio: 8 / 5;
+    --bg: hsl(330 80% calc(90% - (var(--hover) * 10%)));
+    --accent: hsl(270, 12%, 93%);
+    transition: background 0.2s;
+    background:        radial-gradient(circle at top left, var(--accent), transparent 75%),        var(--bg);
+    margin: 0;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.5rem;
+   
+}
+
+figure:after {
+    content: "";
+    position: absolute;
+    width: 20%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    bottom: 0%;
+    left: 10%;
+    background: linear-gradient(-65deg, var(--bg) 50%, var(--accent) 50%);
+    filter: blur(25px);
+    transform:        translateX(calc(var(--hover) * 15%)) scale(calc(1 + (var(--hover) * 0.2)));
+    transition: transform 0.2s, background 0.2s;
+    -webkit-transition: transform 0.2s, background 0.2s;
+    -moz-transition: transform 0.2s, background 0.2s;
+    -ms-transition: transform 0.2s, background 0.2s;
+    -o-transition: transform 0.2s, background 0.2s;
+}
+
+figure img {
+    position: absolute;
+    left: 20%;
+    top: 15%;
+    width: 40%;
+    transform:
+        translateX(calc(var(--hover) * -15%)) scale(calc(1 + (var(--hover) * 0.2)));
+    transition: transform 0.2s;
+}
+
+article {
+    --hover: 0;
+    border: 2px solid rgb(248, 246, 246);
+    width: 30%;
+    background-color: rgb(163, 175, 179);
+    border-radius: 1.5rem;
+    -webkit-border-radius: 1.5rem;
+    -moz-border-radius: 1.5rem;
+    -ms-border-radius: 1.5rem;
+    -o-border-radius: 1.5rem;
+    box-shadow: 0 0 20px black;
+    margin: 1%;
+    padding: 1%;
+}
+
+article:hover {
+    --hover: 1;
+    cursor: pointer;
+}
+
+article h2,p{
+    text-align: center;
+    margin: 0;
+}
+.fatheradmin{
+    width: 80%;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 1% auto;
+}
+.logout{
+    width: 300px;
+}
+.searchuser{
+    width: 50%;
+    margin: 1% auto;
+    
+}
+

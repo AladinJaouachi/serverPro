@@ -1,28 +1,42 @@
 .children{
     border: 2px solid rgb(230, 230, 231);
-   
+    width: 80%;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
 }
-.children * {
+.children img{
+    width:100%;
+    min-width:100%;
+    max-height: 400px;
+    margin-top: 0;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+/* .children * {
     margin: 10px auto;
     text-align: center;
     align-items: center;
     margin: 10px ;
 
-}
-.children :first-child{
+} */
+/* .children :first-child{
     margin: auto;
-    width: 100%;
+    width: 100px
 
-}
+} */
+
 
 .fatherchildren * {
     margin: 20px auto;
 
 }
 
-.HomePage{
-    width: 100%;
-}
 
 navbar{
 

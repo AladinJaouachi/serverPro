@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-
 import { useDispatch } from "react-redux";
 import { changestateadmin } from "../../Redux/slice/Adminslice";
+import "../../css/Dashboardadmin.css";
 
 const Dashboard2 = () => {
   const dispatch = useDispatch();
@@ -52,12 +51,14 @@ const Dashboard2 = () => {
               <Nav.Link href="#">contact us</Nav.Link>
             </Nav>
 
-            <button onClick={logout}>Logout</button>
+            <button className="logout" onClick={logout}>
+              Logout
+            </button>
           </Navbar.Collapse>
         </Container>
       </Navbar>
 
-      <div>
+      <div className="searchuser">
         <Form className="d-flex">
           <Form.Control
             type="search"
@@ -68,18 +69,19 @@ const Dashboard2 = () => {
         </Form>
       </div>
 
-      <div>
+      <div className="fatheradmin">
         {users &&
           users.map((user) => {
             return (
-              <div key={user._id}>
-                <img src={user.image} alt="userimage" />
-                <p>{user.firstname} </p>
-                <p>{user.lastname} </p>
-                <p>{user.age} </p>
-
-                <p>{user.gender} </p>
-              </div>
+              <article key={user._id}>
+                <figure>
+                  <img src={user.image} alt="" />
+                </figure>
+                <h2>{user.firstname}</h2>
+                <h2>{user.lastname}</h2>
+                <h2>{user.specialité}</h2>
+                <p>{user.age}ans </p>
+              </article>
             );
           })}
       </div>
