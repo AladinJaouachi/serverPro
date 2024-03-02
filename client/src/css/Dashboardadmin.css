@@ -1,18 +1,6 @@
 * {
     box-sizing: border-box;
 }
-/* 
-html {
-    font-family: sans-serif;
-    font-weight: 300;
-    color: hsl(0 0% 15%);
-} */
-
-
-
-
-
-
 
 
 figure {
@@ -95,4 +83,21 @@ article h2,p{
     margin: 1% auto;
     
 }
+.bg-body-tertiary button{
+    background-color: white;
+    color: blue;
+    border: 2px solid black;
+    width: 10%;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.bg-body-tertiary button:hover{
+    background-color: blue;
+    color: white;
+}
+
+
 

@@ -4,6 +4,7 @@ import "../../css/HomePage.css";
 import { Link } from "react-router-dom";
 
 import Dropdown from "react-bootstrap/Dropdown";
+import FooterMyApp from "./../FooterMyApp";
 
 const HomePage = () => {
   const [pubs, setpubs] = useState([]);
@@ -24,7 +25,7 @@ const HomePage = () => {
   }, []);
   return (
     <div className="HomePage">
-      <navbar>
+      <nav className="navhomepage">
         <ul>
           <li>
             {" "}
@@ -66,7 +67,7 @@ const HomePage = () => {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-      </navbar>
+      </nav>
 
       <br />
       <div>nouveautés</div>
@@ -84,6 +85,7 @@ const HomePage = () => {
             );
           })}
       </div>
+      <FooterMyApp />
     </div>
   );
 };

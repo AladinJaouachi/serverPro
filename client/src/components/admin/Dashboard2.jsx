@@ -7,6 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { useDispatch } from "react-redux";
 import { changestateadmin } from "../../Redux/slice/Adminslice";
 import "../../css/Dashboardadmin.css";
+import FooterMyApp from "./../FooterMyApp";
 
 const Dashboard2 = () => {
   const dispatch = useDispatch();
@@ -85,6 +86,7 @@ const Dashboard2 = () => {
             );
           })}
       </div>
+      <FooterMyApp />
     </>
   );
 };

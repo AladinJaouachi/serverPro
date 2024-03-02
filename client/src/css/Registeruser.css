@@ -20,12 +20,9 @@
 }
 
 .form-holder .form-content {
-    /* position: relative; */
+   
     text-align: center;
-    /* display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex; */
+   
     display: flex;
     -webkit-justify-content: center;
     justify-content: center;
@@ -42,8 +39,7 @@
     min-width: 540px;
     ;
     text-align: left;
-    /* -webkit-transition: all 0.4s ease;
-    transition: all 0.4s ease; */
+  
     
 }
 

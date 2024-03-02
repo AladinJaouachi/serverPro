@@ -9,7 +9,6 @@ const Loginuser = () => {
   const navigator = useNavigate();
   const [errorses, seterrorses] = useState([]);
   var [bad, setbad] = useState(true);
-
   const [newloginuser, setnewlogin] = useState({
     email: "",
     password: "",
@@ -29,11 +28,10 @@ const Loginuser = () => {
       });
       const data = await response.json();
       if (response.status === 200) {
-        await localStorage.setItem("token", data.token);
+        await localStorage.setItem("tokenuser", data.token);
 
         setbad(true);
-        console.log(data.token);
-        dispatch(changeStateUser());
+        dispatch(changeStateUser(true));
 
         console.log("connected");
         navigator("/Dashboarduser");

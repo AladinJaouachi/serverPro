@@ -2,3 +2,96 @@
     margin: 20px auto;
 
 }
+.addpub{
+    width: 30%;
+    border: 2px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    
+}
+
+p{
+    text-align: center;
+    font-weight: 500;
+    margin: 5px;
+}
+
+.addpub input{
+    width: 90%;
+    border: 2px solid black;
+    margin: 1% auto;
+}
+
+.addpub button{
+    background-color: rgb(118, 118, 224);
+    color: white;
+    width: 50%;
+   margin: 1% auto;
+ 
+
+}
+.navbar{
+    height: 100px;
+}
+.logoutuser{
+    height: 50px;
+    background-color: rgb(245, 51, 51);
+    width: 20%;
+    margin-right: 1%;
+    border: 1px solid white;
+    border-radius:30px;
+    -webkit-border-radius:30px;
+    -moz-border-radius:30px;
+    -ms-border-radius:30px;
+    -o-border-radius:30px;
+}
+.editaccount{
+    height: 50px;
+    background-color: rgb(119, 119, 247);
+    width: 20%;
+    margin-right: 1%;
+        border: 1px solid white;
+        border-radius: 30px;
+        -webkit-border-radius: 30px;
+        -moz-border-radius: 30px;
+        -ms-border-radius: 30px;
+        -o-border-radius: 30px;
+}
+
+.headchild{
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    margin: 50px auto;
+}
+.profiluser{
+    border: 2px solid black;
+    width: 55%;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+
+.profiluser img{
+    margin-left: 5%;
+    width: 30%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+}
+.coordonnnes{
+    width: 60%;
+    margin: auto;
+}
+.coordonnnes>*{
+    margin: 10px auto;
+    text-align: center;
+}

@@ -1,0 +1,87 @@
+.footermyapp{
+    background-color: #303030   ;
+    min-height: 420px;
+
+}
+
+.footerchild{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    margin:  auto;
+
+}
+
+.footerchild>*{
+    width: 30%;
+    border: 2px solid black;
+    border-radius: 20px;
+    background-color: rgb(253, 253, 253);
+    margin-top:50px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+    padding: 20px;
+    text-align: center;
+    font-size: 20px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 0 20px white;
+}
+
+
+.links>*{
+    margin: 20px auto;
+    text-align: center;
+}
+
+
+
+.sendmail input{
+    width: 80%;
+    background-color: rgb(161, 135, 135);
+    
+}
+.sendmail input:hover{
+    border: 2px solid white;
+}
+.sendmail button{
+    background-color: rgb(62, 62, 252);
+    width: 50%;
+    height: 40px;
+    border-radius: 15px;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    -ms-border-radius: 15px;
+    -o-border-radius: 15px;
+    color: white;
+}
+.sendmail button:hover{
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+a{
+    text-decoration: none;
+    color: black;
+}
+
+a:hover{
+   background-color: rgb(190, 157, 157);
+   border-radius: 10px;
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   -ms-border-radius: 10px;
+   -o-border-radius: 10px;
+}
+.adresse>*{
+    margin: 20px auto;
+    text-align: center;
+    
+    
+}
+.footermyapp h2{
+    text-align: center;
+    color: black;
+    margin: 30px;
+}

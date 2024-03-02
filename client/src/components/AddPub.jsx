@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "../css/Dashboarduser.css";
 
 const AddPub = () => {
   const [newpub, setnewpub] = useState({
@@ -24,6 +25,7 @@ const AddPub = () => {
       if (response.status === 200) {
         console.log("add perfect", data);
         alert("pub added successfully ");
+        window.location.reload();
       } else {
         console.log(data);
         alert("something is wrong");
@@ -33,11 +35,29 @@ const AddPub = () => {
     }
   };
   return (
-    <div>
-      <input type="text" id="image" onChange={handlechange} />
-      <input type="text" id="title" onChange={handlechange} />
-      <input type="text" id="content" onChange={handlechange} />
-      <button onClick={handlesubmit}>share</button>
+    <div className="addpub">
+      <h5>Add Pub</h5>
+      <input
+        type="text"
+        placeholder="image"
+        id="image"
+        onChange={handlechange}
+      />
+      <input
+        type="text"
+        placeholder="tittle of pub"
+        id="title"
+        onChange={handlechange}
+      />
+      <input
+        type="text"
+        placeholder="content"
+        id="content"
+        onChange={handlechange}
+      />
+      <button className="sharepub" onClick={handlesubmit}>
+        share
+      </button>
     </div>
   );
 };
