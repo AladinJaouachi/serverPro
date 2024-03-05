@@ -3,7 +3,7 @@ import "../css/Dashboarduser.css";
 
 const AddPub = () => {
   const [newpub, setnewpub] = useState({
-    image: "",
+    image1: "",
     title: "",
     content: "",
   });
@@ -12,7 +12,6 @@ const AddPub = () => {
   };
 
   const handlesubmit = async (e) => {
-    e.preventDefault();
     try {
       const response = await fetch("http://localhost:3001/pubs/nouvellepub", {
         method: "POST",
@@ -40,7 +39,7 @@ const AddPub = () => {
       <input
         type="text"
         placeholder="image"
-        id="image"
+        id="image1"
         onChange={handlechange}
       />
       <input
@@ -56,7 +55,7 @@ const AddPub = () => {
         onChange={handlechange}
       />
       <button className="sharepub" onClick={handlesubmit}>
-        share
+        Share
       </button>
     </div>
   );

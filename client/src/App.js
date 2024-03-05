@@ -1,12 +1,8 @@
 import React from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Home from "./components/admin/Home";
-
 import { Route, Routes } from "react-router-dom";
-// import Register from "./components/Register";
 import Login from "./components/admin/Login";
-
 import Dashboard2 from "./components/admin/Dashboard2";
 import HomePage from "./components/visiteur/HomePage";
 import Loginuser from "./components/User/Loginuser";
@@ -28,7 +24,6 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/Loginadmin" element={<Login />} />
-        <Route path="/admin" element={<Home />} />
         <Route
           path="/Dashboardadmin"
           element={

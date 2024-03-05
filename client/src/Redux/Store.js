@@ -3,5 +3,8 @@ import userSlice from "./slice/Userslice";
 import admininSlice from "./slice/Adminslice";
 
 export const store = configureStore({
-  reducer: { user: userSlice, admin: admininSlice },
+  reducer: {
+    user: userSlice,
+    admin: admininSlice,
+  },
 });

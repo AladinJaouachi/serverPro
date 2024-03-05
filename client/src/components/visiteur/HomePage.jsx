@@ -15,7 +15,6 @@ const HomePage = () => {
           method: "GET",
         });
         const data = await res.json();
-
         setpubs(data.Response);
       } catch (error) {
         console.log(error);
@@ -29,17 +28,17 @@ const HomePage = () => {
         <ul>
           <li>
             {" "}
-            <Link to={"/"} style={{ textDecoration: "none" }}>
+            <Link to={"/aa"} style={{ textDecoration: "none" }}>
               Home
             </Link>
           </li>
           <li>
-            <Link to={"/"} style={{ textDecoration: "none" }}>
+            <Link to={"/aa"} style={{ textDecoration: "none" }}>
               about
             </Link>
           </li>
           <li>
-            <Link to={"/"} style={{ textDecoration: "none" }}>
+            <Link to={"/aa"} style={{ textDecoration: "none" }}>
               contact us
             </Link>
           </li>
@@ -56,14 +55,16 @@ const HomePage = () => {
 
           <Dropdown.Menu>
             <Dropdown.Item>
-              <Link to={"/Loginadmin"}>
-                <button>interface admin </button>
-              </Link>
+              <button>
+                {" "}
+                <Link to={"/Loginadmin"}> interface admin </Link>{" "}
+              </button>
             </Dropdown.Item>
             <Dropdown.Item>
-              <Link to={"/loginuser"}>
-                <button> interface personnel </button>
-              </Link>
+              <button>
+                {" "}
+                <Link to={"/loginuser"}> interface personnel</Link>{" "}
+              </button>
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

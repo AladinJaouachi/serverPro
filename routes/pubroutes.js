@@ -10,9 +10,9 @@ router.post(
   nouvellepubrules(),
   validation,
   async (req, res) => {
-    const { title, image, content } = req.body;
+    const { title, image1, content } = req.body;
     try {
-      const newpub = new pubs({ title, image, content });
+      const newpub = new pubs({ title, image1, content });
       const result = await newpub.save();
       res.status(200).send({ msg: "new pub", Response: result });
     } catch (error) {

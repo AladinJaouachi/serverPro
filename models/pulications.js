@@ -6,7 +6,7 @@ const pubSchema = new Schema({
     type: String,
     required: true,
   },
-  image: {
+  image1: {
     type: String,
   },
   content: {

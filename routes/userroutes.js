@@ -91,6 +91,21 @@ router.post("/loginuser", userloginrules(), validation, async (req, res) => {
 });
 //
 
+// get one user
+router.get("/:id", async (req, res) => {
+  try {
+    const findeduser = await user.findOne({ _id: req.params.id });
+    findeduser
+      ? res
+          .status(200)
+          .send({ msg: "get user successfully", Response: findeduser })
+      : res.status(400).send({ msg: "user not founded" });
+  } catch (error) {
+    res.status(500).send({ msg: "failed get user", Response: error });
+  }
+});
+// end
+
 // delete user method
 router.delete("/:id", async (req, res) => {
   try {
@@ -109,20 +124,17 @@ router.delete("/:id", async (req, res) => {
 });
 
 // update user method
-router.patch("/:id", async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
-    const updateduser = await user.updateOne(
+    const updatedUser = await user.updateOne(
       { _id: req.params.id },
-      { $set: req.body },
-
-      updateduser.modifiedCount
-        ? res
-            .status(200)
-            .send({ msg: "update user successfully", Response: updateduser })
-        : res.status(404).send({ msg: "user already updated" })
+      { $set: { ...req.body } }
     );
+    updatedUser.modifiedCount
+      ? res.status(200).send({ msg: "updated success", Response: updatedUser })
+      : res.status(400).send({ msg: "already updated" });
   } catch (error) {
-    res.status(500).Send({ msg: "update user failed", Response: error });
+    res.status(500).send({ msg: "update user failed", Response: error });
   }
 });
 

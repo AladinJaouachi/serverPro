@@ -28,19 +28,20 @@ const Loginuser = () => {
       });
       const data = await response.json();
       if (response.status === 200) {
-        await localStorage.setItem("tokenuser", data.token);
-
+        await localStorage.setItem("tokenuser", data.tokenuser);
+        await localStorage.setItem("coordin", JSON.stringify(data.Response));
+        await localStorage.setItem("iduser", data.Response._id);
         setbad(true);
         dispatch(changeStateUser(true));
-
         console.log("connected");
+
         navigator("/Dashboarduser");
       } else {
         console.log(data);
         seterrorses(data.errors);
         console.log("you don't have account register first");
         setbad(false);
-        // console.log(bad);
+        changeStateUser(false);
       }
     } catch (error) {
       if (error) {
@@ -48,7 +49,6 @@ const Loginuser = () => {
       }
     }
   };
-
   return (
     <>
       <div className="container">
@@ -57,7 +57,6 @@ const Loginuser = () => {
             <form className="loginuser">
               <h3>login user form</h3>
               <div className="login__field">
-                <i className="login__icon fas fa-user"></i>
                 <input
                   type="text"
                   className="login__input"
@@ -67,7 +66,6 @@ const Loginuser = () => {
                 />
               </div>
               <div className="login__field">
-                <i className="login__icon fas fa-lock"></i>
                 <input
                   type="password"
                   className="login__input"

@@ -92,13 +92,6 @@ const Register = () => {
           Register
         </button>
       </form>
-      {/* {errorshand
-        ? errorshand.map((error, key) => (
-            <ul key={key}>
-              <li> {error.msg} </li>
-            </ul>
-          ))
-        : null} */}
     </div>
   );
 };

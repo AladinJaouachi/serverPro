@@ -16,7 +16,7 @@ const FooterMyApp = () => {
         <div className="links">
           <h5>links</h5>
           <h6>
-            <a href="https://www.facebook.com/ala.jawachi.3"> facebook</a>
+            <a href="https://www.facebook.com/ala.jawachi.3">facebook</a>
           </h6>
 
           <h6>
