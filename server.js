@@ -6,7 +6,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import adminroutes from "./routes/adminroutes.js";
-import userrouters from "./routes/userroutes.js";
+import userroute from "./routes/userroutes.js";
 import pubroutes from "./routes/pubroutes.js";
 
 import bodyParser from "body-parser";
@@ -27,17 +27,17 @@ mongoose
   })
   .catch((error) => console.log(error));
 
-// e(cors()); solve problem between ports
+// (cors()); solve problem between ports
 app.use(cors());
 //
 // routes
 app.use("/admin", adminroutes);
-app.use("/user", userrouters);
+app.use("/user", userroute);
 app.use("/pubs", pubroutes);
 //
 
 // server run
 app.listen(PORT, (err) => {
   if (err) throw err;
-  console.log(`server run on port ${PORT}`);
+  console.log(`server run on http://localhost: ${PORT}`);
 });

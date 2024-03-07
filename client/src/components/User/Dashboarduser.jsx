@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import AddPub from "./../AddPub";
 import "../../css/Dashboarduser.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeStateUser } from "../../Redux/slice/Userslice";
+import { changeprofil } from "../../Redux/slice/profil";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -14,18 +15,15 @@ import FooterMyApp from "./../FooterMyApp";
 
 const Dashboarduser = () => {
   const dispatch = useDispatch();
-
   const navigator = useNavigate();
   const [pubs, setpubs] = useState([]);
-  const [userdash, setuserdash] = useState();
-
   // logout function
   const logout = async (e) => {
     localStorage.removeItem("tokenuser");
     localStorage.removeItem("coordin");
     localStorage.removeItem("iduser");
     dispatch(changeStateUser(false));
-    setuserdash(null);
+    dispatch(changeprofil(false));
     navigator("/");
     alert("logout success ");
   };
@@ -43,31 +41,49 @@ const Dashboarduser = () => {
     }
   };
   // end
-  // get user dashboard
+
   const getdashboard = async (e) => {
     try {
-      const myid = await localStorage.getItem("iduser");
-      const response = await fetch(`http://localhost:3001/user/${myid}`, {
-        method: "GET",
+      const tt = await localStorage.getItem("coordin");
+      const ttt = await JSON.parse(tt);
+      await dispatch(changeprofil(ttt));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkingtoken = async (e) => {
+    try {
+      const token = await localStorage.getItem("tokenuser");
+      const response = await fetch("http://localhost:3001/user/currentuser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
       });
       const data = await response.json();
-
       if (response.status === 200) {
-        await setuserdash(data.Response);
-        console.log("ok c'est fait");
-        console.log("hethi me db", data.Response);
-        await console.log("hethi m state", userdash);
+        console.log(data);
+        alert("you are auth");
+
+        dispatch(changeStateUser(true));
       } else {
-        console.log("failed");
+        console.log("you are not auth");
+        alert("you are not auth");
+        dispatch(changeStateUser(false));
+        dispatch(changeprofil(false));
+        navigator("/loginuser");
       }
     } catch (error) {
       console.log(error);
     }
   };
-  // end
+
   useEffect(() => {
     getpubs();
     getdashboard();
+    checkingtoken();
   }, []);
   const [updateduser, setupdateduser] = useState({});
 
@@ -90,7 +106,6 @@ const Dashboarduser = () => {
         console.log("updated success");
         console.log(data);
         alert("updated successfully");
-        window.location.reload();
       } else {
         console.log("failed update");
         alert("failed update retry again");
@@ -103,6 +118,9 @@ const Dashboarduser = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  const usercoord = useSelector((state) => state.profil.value);
+  console.log(usercoord);
   return (
     <div>
       <div>
@@ -231,14 +249,14 @@ const Dashboarduser = () => {
 
       <div className="headchild">
         <div className="profiluser">
-          <img src={userdash && userdash.image} alt="" />
+          <img src={usercoord && usercoord.image} alt="" />
           <div className="coordonnnes">
-            <h6>firstname : {userdash && userdash.firstname}</h6>
-            <h6>lastname : {userdash && userdash.lastname}</h6>
-            <h6>specialité : {userdash && userdash.specialité}</h6>
-            <h6>age : {userdash && userdash.age}</h6>
-            <h6>gender : {userdash && userdash.gender}</h6>
-            <h6>place : {userdash && userdash.place}</h6>
+            <h6>firstname : {usercoord && usercoord.firstname}</h6>
+            <h6>lastname : {usercoord && usercoord.lastname}</h6>
+            <h6>specialité : {usercoord && usercoord.specialité}</h6>
+            <h6>age : {usercoord && usercoord.age}</h6>
+            <h6>gender : {usercoord && usercoord.gender}</h6>
+            <h6>place : {usercoord && usercoord.place}</h6>
           </div>
         </div>
         <AddPub />

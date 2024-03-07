@@ -1,7 +1,5 @@
 import express from "express";
 const router = express.Router();
-
-import user from "../models/user.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import {
@@ -9,6 +7,11 @@ import {
   userregisterrules,
   validation,
 } from "../middleware/validator.js";
+import user from "./../models/user.js";
+import nodemailer from "nodemailer";
+import verifyToken from "../middleware/isAuth.js";
+
+router.use(express.json());
 
 // register method
 router.post(
@@ -75,15 +78,15 @@ router.post("/loginuser", userloginrules(), validation, async (req, res) => {
     if (!comparedpassword) {
       return res.status(400).send({ msg: "bad credential" });
     }
-    const token = await jwt.sign(
+    const tokenuser = await jwt.sign(
       { _id: useremail._id },
       process.env.SECRET_KEY,
-      { expiresIn: 3600 }
+      { expiresIn: 36000 }
     );
     return res.status(200).send({
       msg: "login user successfully",
       Response: useremail,
-      tokenuser: token,
+      tokenuser,
     });
   } catch (error) {
     res.status(500).send({ msg: "login user failed", Response: error });
@@ -139,12 +142,54 @@ router.put("/:id", async (req, res) => {
 });
 
 // get users method
-router.get("/allusers", async (req, res) => {
+
+router.get("/", async (req, res) => {
   try {
-    const allusers = await user.find();
-    res.status(200).send({ msg: allusers });
+    const allofusers = await user.find({});
+    allofusers
+      ? res.status(200).send({ msg: " nejem yjib", Response: allofusers })
+      : res.status(400).send({ msg: "no users" });
   } catch (error) {
-    res.status(500).send({ msg: "get all users failed", Response: error });
+    res.status(500).send({ msg: "get users failed", Response: error });
+  }
+});
+
+//  send mail
+router.post("/send-mail", (req, res) => {
+  const { from, subject, message } = req.body;
+  try {
+    const transporter = nodemailer.createTransport({
+      service: "Gmail",
+      auth: {
+        user: "alaajawachi5@gmail.com",
+        pass: process.env.codesendmail,
+      },
+    });
+    const mailOptions = {
+      from: from,
+      to: "alaajawachi5@gmail.com",
+      subject: subject,
+      message: message,
+    };
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.log(error);
+        res.status(400).send({ msg: "send mail failed" });
+      } else {
+        console.log("Email sent: " + info.response);
+        res.status(200).send({ msg: "send mail successfully" });
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.post("/currentuser", verifyToken, async (req, res) => {
+  try {
+    res.send({ msg: "user is auth", user: req.user });
+  } catch (error) {
+    console.log(error);
   }
 });
 

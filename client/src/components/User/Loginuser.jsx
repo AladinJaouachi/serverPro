@@ -34,7 +34,6 @@ const Loginuser = () => {
         setbad(true);
         dispatch(changeStateUser(true));
         console.log("connected");
-
         navigator("/Dashboarduser");
       } else {
         console.log(data);
