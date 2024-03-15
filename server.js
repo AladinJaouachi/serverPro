@@ -8,7 +8,7 @@ import cors from "cors";
 import adminroutes from "./routes/adminroutes.js";
 import userroute from "./routes/userroutes.js";
 import pubroutes from "./routes/pubroutes.js";
-
+import feedsroutes from "./routes/feedroutes.js";
 import bodyParser from "body-parser";
 
 const app = express();
@@ -34,6 +34,7 @@ app.use(cors());
 app.use("/admin", adminroutes);
 app.use("/user", userroute);
 app.use("/pubs", pubroutes);
+app.use("/feeds", feedsroutes);
 //
 
 // server run

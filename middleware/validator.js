@@ -57,6 +57,12 @@ export const nouvellepubrules = () => [
   }),
 ];
 
+export const newfeedback = () => [
+  check("email", "enter a valid email").isEmail(),
+  check("subject", "subject is required").notEmpty(),
+  check("message", "message is required").notEmpty(),
+];
+
 export const validation = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

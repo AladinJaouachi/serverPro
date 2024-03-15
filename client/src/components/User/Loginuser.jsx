@@ -29,7 +29,6 @@ const Loginuser = () => {
       const data = await response.json();
       if (response.status === 200) {
         await localStorage.setItem("tokenuser", data.tokenuser);
-        await localStorage.setItem("coordin", JSON.stringify(data.Response));
         await localStorage.setItem("iduser", data.Response._id);
         setbad(true);
         dispatch(changeStateUser(true));

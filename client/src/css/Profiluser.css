@@ -1,0 +1,23 @@
+.myuser{
+    background-color: rgb(228, 213, 213);
+    width: 60%;
+    margin:1% auto;
+    text-align: center;
+    padding: 1%;
+    box-shadow: 0 0 10px rgb(224, 2, 2);
+    
+}
+.myuser img{
+    width: 25%;
+    margin: 1% auto;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    border: 2px solid black;
+}
+.myuser h4{
+    color: black;
+   
+}

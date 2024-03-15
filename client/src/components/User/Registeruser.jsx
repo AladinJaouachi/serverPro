@@ -12,6 +12,7 @@ const Registeruser = () => {
     password: "",
     specialité: "",
     age: "",
+    place: "",
     gender: "",
   });
   const handlechange = async (req, res) => {
@@ -115,6 +116,16 @@ const Registeruser = () => {
                       onChange={handlechange}
                     />
                   </div>
+                  <div className="col-md-12">
+                    <input
+                      className="form-control"
+                      type="number"
+                      id="phone"
+                      placeholder="phone"
+                      required
+                      onChange={handlechange}
+                    />
+                  </div>
                   <div>
                     <span>gender</span>
                     <select id="gender" onChange={handlechange}>
@@ -122,6 +133,16 @@ const Registeruser = () => {
                       <option value="male">male</option>
                       <option value="female">female</option>
                     </select>
+                  </div>
+                  <div className="col-md-12">
+                    <input
+                      className="form-control"
+                      type="text"
+                      id="place"
+                      placeholder="place"
+                      required
+                      onChange={handlechange}
+                    />
                   </div>
                   <div className="form-button mt-3">
                     <button id="submit" type="submit" onClick={handlesubmit}>

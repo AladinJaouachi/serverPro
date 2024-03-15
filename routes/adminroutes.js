@@ -7,6 +7,7 @@ import {
   adminregisterrules,
   validation,
 } from "../middleware/validator.js";
+import feedback from "../models/feedback.js";
 
 const router = express.Router();
 
@@ -109,6 +110,19 @@ router.get("/alladmin", async (req, res) => {
     res.status(200).send({ msg: "all admins", Response: alladmin });
   } catch (error) {
     res.status(500).send({ msg: "get failed", Response: error });
+  }
+});
+router.get("/f", async (req, res) => {
+  try {
+    const allfeeds = await feedback.find();
+    if (allfeeds) {
+      res
+        .status(200)
+        .send({ msg: "this is all feedbacks", Response: allfeeds });
+    }
+  } catch (error) {
+    res.status(500).send({ msg: "Failed get feedbacks", Response: error });
+    console.log(error);
   }
 });
 

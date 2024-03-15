@@ -40,6 +40,7 @@
 .sendmail input{
     width: 80%;
     background-color: rgb(161, 135, 135);
+    font-size: small;
     
 }
 .sendmail input:hover{
@@ -61,12 +62,12 @@
     color: black;
     border: 2px solid black;
 }
-a{
-    text-decoration: none;
+.links a{
+    text-decoration: none !important;
     color: black;
 }
 
-a:hover{
+.links a:hover{
    background-color: rgb(190, 157, 157);
    border-radius: 10px;
    -webkit-border-radius: 10px;

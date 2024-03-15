@@ -1,0 +1,30 @@
+
+.feedchild{
+    background-color: rgb(221, 218, 218);
+    width: 80%;
+    margin: 2% auto;
+    padding: 2%;
+    box-shadow: 0 0 10px black;
+   
+}
+.feedhead{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.feedhead button{
+    width: 20%;
+    height: 40px;
+    margin: 2%;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    background-color: rgb(201, 13, 13);
+}
+.feedhead button:hover{
+    background-color: white;
+    color: red;
+    border: 2px solid red;
+}

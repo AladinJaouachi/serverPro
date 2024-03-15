@@ -12,6 +12,7 @@ const AddPub = () => {
   };
 
   const handlesubmit = async (e) => {
+    e.preventDefault();
     try {
       const response = await fetch("http://localhost:3001/pubs/nouvellepub", {
         method: "POST",

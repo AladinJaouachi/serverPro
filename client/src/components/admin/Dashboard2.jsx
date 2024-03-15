@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -7,7 +7,6 @@ import Navbar from "react-bootstrap/Navbar";
 import { useDispatch } from "react-redux";
 import { changestateadmin } from "../../Redux/slice/Adminslice";
 import "../../css/Dashboardadmin.css";
-import FooterMyApp from "./../FooterMyApp";
 
 const Dashboard2 = () => {
   const dispatch = useDispatch();
@@ -44,7 +43,7 @@ const Dashboard2 = () => {
     await dispatch(changestateadmin(false));
     await navigator("/");
   };
-  console.log(users);
+
   return (
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
@@ -60,6 +59,7 @@ const Dashboard2 = () => {
               <Nav.Link href="#">Home</Nav.Link>
               <Nav.Link href="#">about</Nav.Link>
               <Nav.Link href="#">contact us</Nav.Link>
+              <Nav.Link href="/allfeedbacks">allfeedbacks</Nav.Link>
             </Nav>
 
             <button className="logout" onClick={logout}>
@@ -97,23 +97,24 @@ const Dashboard2 = () => {
             .map((filtereduser) => {
               return (
                 <article key={filtereduser._id}>
-                  <figure>
-                    <img src={filtereduser.image} alt="" />
-                  </figure>
-                  <h2>{filtereduser.firstname}</h2>
-                  <h2>{filtereduser.lastname}</h2>
-                  <h2>{filtereduser.specialité}</h2>
-                  <p>{filtereduser.age} ans </p>
+                  <Link to={`/${filtereduser._id}`}>
+                    <figure>
+                      <img src={filtereduser.image} alt="" />
+                    </figure>
+                    <h2>{filtereduser.firstname}</h2>
+                    <h2>{filtereduser.lastname}</h2>
+                    <h2>{filtereduser.specialité}</h2>
+                    <p>{filtereduser.age} ans </p>
+                  </Link>
                 </article>
               );
             })
         ) : (
           <center>
-            <p> no data found </p>
+            <p> loading ...</p>
           </center>
         )}
       </div>
-      <FooterMyApp />
     </>
   );
 };

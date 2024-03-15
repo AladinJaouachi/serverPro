@@ -36,6 +36,14 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  place: {
+    type: String,
+    required: true,
+  },
+  phone: {
+    type: String,
+    required: true,
+  },
   isUser: {
     type: Boolean,
     required: true,

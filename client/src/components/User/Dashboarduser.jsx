@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import AddPub from "./../AddPub";
 import "../../css/Dashboarduser.css";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { changeStateUser } from "../../Redux/slice/Userslice";
 import { changeprofil } from "../../Redux/slice/profil";
 import Container from "react-bootstrap/Container";
@@ -41,12 +41,22 @@ const Dashboarduser = () => {
     }
   };
   // end
-
-  const getdashboard = async (e) => {
+  const [myuser, setmyuser] = useState("");
+  const getuser = async (e) => {
     try {
-      const tt = await localStorage.getItem("coordin");
-      const ttt = await JSON.parse(tt);
-      await dispatch(changeprofil(ttt));
+      const idd = await localStorage.getItem("iduser");
+      const response = await fetch("http://localhost:3001/user/" + idd, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      if (response.status === 200) {
+        setmyuser(data.Response);
+      } else {
+        alert("failed get profil user reload please ! ");
+      }
     } catch (error) {
       console.log(error);
     }
@@ -64,9 +74,6 @@ const Dashboarduser = () => {
       });
       const data = await response.json();
       if (response.status === 200) {
-        console.log(data);
-        alert("you are auth");
-
         dispatch(changeStateUser(true));
       } else {
         console.log("you are not auth");
@@ -82,15 +89,14 @@ const Dashboarduser = () => {
 
   useEffect(() => {
     getpubs();
-    getdashboard();
     checkingtoken();
+    getuser();
   }, []);
-  const [updateduser, setupdateduser] = useState({});
 
   const handlechange = (req, res) => {
     setupdateduser({ ...updateduser, [req.target.id]: req.target.value });
   };
-
+  const [updateduser, setupdateduser] = useState({});
   const updateuser = async (e) => {
     try {
       const myid = await localStorage.getItem("iduser");
@@ -106,9 +112,13 @@ const Dashboarduser = () => {
         console.log("updated success");
         console.log(data);
         alert("updated successfully");
+        window.location.reload();
       } else {
         console.log("failed update");
         alert("failed update retry again");
+        localStorage.removeItem("iduser");
+        localStorage.removeItem("tokenuser");
+        localStorage.removeItem("coordin");
       }
     } catch (error) {
       console.log(error);
@@ -119,8 +129,6 @@ const Dashboarduser = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const usercoord = useSelector((state) => state.profil.value);
-  console.log(usercoord);
   return (
     <div>
       <div>
@@ -195,6 +203,15 @@ const Dashboarduser = () => {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Control
+                  type="number"
+                  id="phone"
+                  placeholder="edit phone"
+                  onChange={handlechange}
+                  autoFocus
+                />
+              </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Control
                   type="text"
                   id="place"
                   placeholder="edit place"
@@ -249,14 +266,15 @@ const Dashboarduser = () => {
 
       <div className="headchild">
         <div className="profiluser">
-          <img src={usercoord && usercoord.image} alt="" />
+          <img src={myuser && myuser.image} alt="" />
           <div className="coordonnnes">
-            <h6>firstname : {usercoord && usercoord.firstname}</h6>
-            <h6>lastname : {usercoord && usercoord.lastname}</h6>
-            <h6>specialité : {usercoord && usercoord.specialité}</h6>
-            <h6>age : {usercoord && usercoord.age}</h6>
-            <h6>gender : {usercoord && usercoord.gender}</h6>
-            <h6>place : {usercoord && usercoord.place}</h6>
+            <h6>firstname : {myuser && myuser.firstname}</h6>
+            <h6>lastname : {myuser && myuser.lastname}</h6>
+            <h6>specialité : {myuser && myuser.specialité}</h6>
+            <h6>age : {myuser && myuser.age}</h6>
+            <h6>phone : {myuser && myuser.phone} </h6>
+            <h6>gender : {myuser && myuser.gender}</h6>
+            <h6>place : {myuser && myuser.place}</h6>
           </div>
         </div>
         <AddPub />

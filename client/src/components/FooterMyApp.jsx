@@ -11,9 +11,10 @@ const FooterMyApp = () => {
   const handlechange = (req, res) => {
     setemailsend({ ...emailsend, [req.target.id]: req.target.value });
   };
-  const handlesend = async () => {
+  const handlesend = async (e) => {
+    e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3001/user/send-mail", {
+      const response = await fetch("http://localhost:3001/user/feedback", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -23,12 +24,15 @@ const FooterMyApp = () => {
       const data = await response.json();
       if (response.status === 200) {
         console.log(data);
+        alert("feedback sended successfuly");
         console.log("email sended success");
+        window.location.href = "/";
       } else {
         console.log(data);
         console.log("email sended failed");
       }
     } catch (error) {
+      alert("failed send feedback");
       console.log(error);
     }
   };
@@ -62,7 +66,7 @@ const FooterMyApp = () => {
           </h6>
         </div>
         <div className="sendmail">
-          <h5>contact admin</h5>
+          <h5>Add feedback</h5>
           <form>
             <input
               type="email"

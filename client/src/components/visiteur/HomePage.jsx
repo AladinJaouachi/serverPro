@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
@@ -14,6 +13,10 @@ import plumbingservice from "../../images/plumbingservice.png";
 import mechanic from "../../images/repaircar.png";
 import architecser from "../../images/architectservice.png";
 import hairdressing from "../../images/hairdressing.png";
+import client1 from "../../images/client1.jpeg";
+import client2 from "../../images/client2.jpeg";
+import client3 from "../../images/client3.jpeg";
+import client4 from "../../images/client4.jpeg";
 
 import "../../css/HomePage.css";
 import { Link } from "react-router-dom";
@@ -22,22 +25,6 @@ import Dropdown from "react-bootstrap/Dropdown";
 import FooterMyApp from "./../FooterMyApp";
 
 const HomePage = () => {
-  const [pubs, setpubs] = useState([]);
-  const getpubs = async (e) => {
-    try {
-      const res = await fetch("http://localhost:3001/pubs/allpubs", {
-        method: "GET",
-      });
-      const data = await res.json();
-      setpubs(data.Response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    getpubs();
-  }, []);
-
   return (
     <div className="HomePage">
       <div className="blak">
@@ -48,7 +35,7 @@ const HomePage = () => {
         </h6>
         <h6>
           <FontAwesomeIcon icon={faEnvelope} style={{ color: "#FFD43B" }} />
-          Email:example@gmail.com
+          Email:alaajawachi5@gmail.com
         </h6>
       </div>
 
@@ -56,9 +43,21 @@ const HomePage = () => {
         <div className="part1-1">
           <h3>Title</h3>
           <ul>
-            <li>Home</li>
-            <li>About</li>
+            <li>
+              {" "}
+              <Link to={"/"}>Home </Link>
+            </li>
+            <li>
+              <a href="#about">About</a>
+            </li>
             <li>Contact us</li>
+            <li>
+              <Link to={"/userslist"}>Persons</Link>
+            </li>{" "}
+            <li>
+              {" "}
+              <Link to={"/news"}>News </Link>
+            </li>
           </ul>
           <Dropdown data-bs-theme="dark">
             <Dropdown.Toggle
@@ -122,7 +121,7 @@ const HomePage = () => {
           <h5>MAINTAIN</h5>
         </div>
       </div>
-      <div className="part3">
+      <div className="part3" id="about">
         <div className="part3-1">
           <h2>About us</h2>
           <p>
@@ -179,23 +178,60 @@ const HomePage = () => {
         </div>
         <button>Read more</button>
       </div>
+      <div className="part6">
+        <h1>What our clients says</h1>
+        <div className="part6father">
+          <div className="part6-1">
+            <div className="part6-1child">
+              <img src={client1} alt="" />
+              <div> name name</div>
+            </div>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Exercitationem molestias corporis aperiam soluta maiores similique
+              aliquam aut voluptates? Molestiae, eveniet.
+            </p>
+          </div>
+          <div className="part6-1">
+            <div className="part6-1child">
+              <img src={client2} alt="" />
+              <div> name name</div>
+            </div>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Exercitationem molestias corporis aperiam soluta maiores similique
+              aliquam aut voluptates? Molestiae, eveniet.
+            </p>
+          </div>
+          <div className="part6-1">
+            <div className="part6-1child">
+              <img src={client3} alt="" />
+              <div> name name</div>
+            </div>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Exercitationem molestias corporis aperiam soluta maiores similique
+              aliquam aut voluptates? Molestiae, eveniet.
+            </p>
+          </div>
+          <div className="part6-1">
+            <div className="part6-1child">
+              <img src={client4} alt="" />
+              <div> name name</div>
+            </div>
+            <p>
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+              Exercitationem molestias corporis aperiam soluta maiores similique
+              aliquam aut voluptates? Molestiae, eveniet.
+            </p>
+          </div>
+        </div>
+      </div>
 
       <br />
-      <div>nouveautés</div>
       <br />
-      <div className="fatherchildren">
-        {" "}
-        {pubs &&
-          pubs.map((pub) => {
-            return (
-              <div key={pub._id} className="children">
-                <img src={pub.image} alt="" />
-                <p>{pub.title} </p>
-                <p>{pub.content} </p>
-              </div>
-            );
-          })}
-      </div>
+      <br />
+
       <FooterMyApp />
     </div>
   );

@@ -40,6 +40,7 @@ figure img {
     left: 20%;
     top: 15%;
     width: 40%;
+    height: 60%;
     transform:        translateX(calc(var(--hover) * -15%)) scale(calc(1 + (var(--hover) * 0.2)));
     transition: transform 0.2s;
     border-radius:10px ;
@@ -62,6 +63,10 @@ article {
     box-shadow: 0 0 20px black;
     margin: 1%;
     padding: 1%;
+}
+article a{
+    text-decoration: none;
+    color: black
 }
 
 article:hover {
@@ -102,6 +107,7 @@ article h2,p{
     background-color: blue;
     color: white;
 }
+
 
 
 

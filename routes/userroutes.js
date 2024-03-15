@@ -3,13 +3,14 @@ const router = express.Router();
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import {
+  newfeedback,
   userloginrules,
   userregisterrules,
   validation,
 } from "../middleware/validator.js";
 import user from "./../models/user.js";
-import nodemailer from "nodemailer";
 import verifyToken from "../middleware/isAuth.js";
+import feedback from "../models/feedback.js";
 
 router.use(express.json());
 
@@ -27,6 +28,8 @@ router.post(
       password,
       specialité,
       age,
+      place,
+      phone,
       gender,
     } = req.body;
     try {
@@ -44,6 +47,8 @@ router.post(
           password: hashedPassword,
           specialité,
           age,
+          place,
+          phone,
           gender,
         });
         const saveduser = await newuser.save();
@@ -113,9 +118,7 @@ router.get("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const deleteduser = await user.deleteOne({ _id: req.params.id });
-    res
-      .status(200)
-      .send({ msg: "delete user successfully", Response: deleteduser });
+
     deleteduser.deletedCount
       ? res
           .status(200)
@@ -154,36 +157,23 @@ router.get("/", async (req, res) => {
   }
 });
 
-//  send mail
-router.post("/send-mail", (req, res) => {
-  const { from, subject, message } = req.body;
+// adding feedback
+router.post("/feedback", newfeedback(), validation, async (req, res) => {
+  const { email, subject, message } = req.body;
   try {
-    const transporter = nodemailer.createTransport({
-      service: "Gmail",
-      auth: {
-        user: "alaajawachi5@gmail.com",
-        pass: process.env.codesendmail,
-      },
-    });
-    const mailOptions = {
-      from: from,
-      to: "alaajawachi5@gmail.com",
-      subject: subject,
-      message: message,
-    };
-    transporter.sendMail(mailOptions, (error, info) => {
-      if (error) {
-        console.log(error);
-        res.status(400).send({ msg: "send mail failed" });
-      } else {
-        console.log("Email sent: " + info.response);
-        res.status(200).send({ msg: "send mail successfully" });
-      }
-    });
+    const newfeed = new feedback({ email, subject, message });
+    const aa = await newfeed.save();
+    if (aa) {
+      res.status(200).send({ msg: "sended", Response: aa });
+    }
   } catch (error) {
+    res.status(500).send({ msg: "failed send feedback", Response: error });
     console.log(error);
   }
 });
+//
+
+// get allfeedbacks
 
 router.post("/currentuser", verifyToken, async (req, res) => {
   try {
