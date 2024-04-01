@@ -18,7 +18,6 @@ const Login = () => {
     setnewlogin({ ...newlogin, [req.target.id]: req.target.value });
   };
   const handlesubmit = async (e) => {
-    e.preventDefault();
     try {
       const response = await fetch("http://localhost:3001/admin/loginadmin", {
         method: "POST",

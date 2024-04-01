@@ -10,9 +10,17 @@ router.post(
   nouvellepubrules(),
   validation,
   async (req, res) => {
-    const { title, image1, content } = req.body;
+    const { title, image1, pubdate, fromwho, idperson, content } = req.body;
     try {
-      const newpub = new pubs({ title, image1, content });
+      const newpub = new pubs({
+        title,
+        image1,
+        pubdate,
+
+        fromwho,
+        content,
+        idperson,
+      });
       const result = await newpub.save();
       res.status(200).send({ msg: "new pub", Response: result });
     } catch (error) {
@@ -42,5 +50,20 @@ router.get("/allpubs", async (req, res) => {
     res.status(500).send({ msg: "failed get pubs", Response: error });
   }
 });
+
+// get specific pubs
+router.get("/:id", async (req, res) => {
+  try {
+    const pub = await pubs.find({ idperson: req.params.id });
+    if (pubs) {
+      res.status(200).send({ msg: "all pubs", Response: pub });
+    } else {
+      res.status(400).send({ msg: "no pubs" });
+    }
+  } catch (error) {
+    res.status(500).send({ msg: "failed get pubs", Response: error });
+  }
+});
+//
 
 export default router;

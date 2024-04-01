@@ -1,0 +1,17 @@
+.AboutUs{
+    width: 80%;
+    background-color: rgb(238, 214, 214);
+    margin: 5% auto;
+    padding: 3%;
+    border: 3px solid black;
+    border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -ms-border-radius: 10px ;
+    -o-border-radius: 10px ;
+    box-shadow: 0 0 10px black;
+}
+.AboutUs p{
+    font-weight: bold;
+    font-size: large;
+}

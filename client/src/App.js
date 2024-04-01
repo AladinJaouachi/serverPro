@@ -13,8 +13,11 @@ import ProtectedRouteadmin from "./ProtectedRouteAdmin";
 import { useSelector } from "react-redux";
 import News from "./components/User/News";
 import Userlist from "./components/User/Userlist";
-import Feedbacks from "./components/admin/Feedbacks";
+
 import ProfilUser from "./components/User/ProfilUser";
+import AboutUs from "./components/AboutUs";
+import Demandes from "./components/admin/Demandes";
+import Filtreduser from "./components/User/Filtreduser";
 
 function App() {
   const adminprivate = useSelector((state) => state.admin.value);
@@ -56,14 +59,16 @@ function App() {
         <Route path="/news" element={<News />} />
         <Route path="userslist" element={<Userlist />} />
         <Route
-          path="/allfeedbacks"
+          path="/Demandes"
           element={
             <ProtectedRouteadmin isAllowed={adminprivate}>
-              <Feedbacks />
+              <Demandes />
             </ProtectedRouteadmin>
           }
         />
         <Route path="/:id" element={<ProfilUser />} />
+        <Route path="/AboutUs" element={<AboutUs />} />
+        <Route path="/filtered/:service" element={<Filtreduser />} />
       </Routes>
     </div>
   );

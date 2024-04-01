@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../../css/Userlist.css";
+import { Link } from "react-router-dom";
+
 const Userlist = () => {
   const [users, setusers] = useState("");
   const [filtered, setfiltred] = useState("");
@@ -46,13 +48,15 @@ const Userlist = () => {
             .map((filtereduser) => {
               return (
                 <article key={filtereduser._id}>
-                  <figure>
-                    <img src={filtereduser.image} alt="" />
-                  </figure>
-                  <h2>{filtereduser.firstname}</h2>
-                  <h2>{filtereduser.lastname}</h2>
-                  <h2>{filtereduser.specialité}</h2>
-                  <p>{filtereduser.age} ans </p>
+                  <Link to={`/${filtereduser._id}`}>
+                    <figure>
+                      <img src={filtereduser.image} alt="" />
+                    </figure>
+                    <h2>{filtereduser.firstname}</h2>
+                    <h2>{filtereduser.lastname}</h2>
+                    <h2>{filtereduser.specialité}</h2>
+                    <p>{filtereduser.age} ans </p>
+                  </Link>
                 </article>
               );
             })

@@ -1,10 +1,7 @@
 import "@fortawesome/fontawesome-free/css/all.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPhone, faEnvelope } from "@fortawesome/free-solid-svg-icons";
-import imageone from "../../images/slider-img.png";
-import repair from "../../images/repair.png";
-import improve from "../../images/paint.png";
-import maintain from "../../images/maintain.jpg";
+
 import aboutimg from "../../images/about-img.jpg";
 import professimag from "../../images/professional-img.png";
 import maintservice from "../../images/maintservice.png";
@@ -17,6 +14,7 @@ import client1 from "../../images/client1.jpeg";
 import client2 from "../../images/client2.jpeg";
 import client3 from "../../images/client3.jpeg";
 import client4 from "../../images/client4.jpeg";
+import nettoyage from "../../images/nettoyage.jpeg";
 
 import "../../css/HomePage.css";
 import { Link } from "react-router-dom";
@@ -25,6 +23,13 @@ import Dropdown from "react-bootstrap/Dropdown";
 import FooterMyApp from "./../FooterMyApp";
 
 const HomePage = () => {
+  const plombier = "plombier";
+  const mechanicien = "mechanicien";
+  const electricien = "electricien";
+  const architect = "architect";
+  const coiffeur = "coiffeur";
+  const menage = "menage";
+  const maintenance = "maintenance";
   return (
     <div className="HomePage">
       <div className="blak">
@@ -50,13 +55,16 @@ const HomePage = () => {
             <li>
               <a href="#about">About</a>
             </li>
-            <li>Contact us</li>
             <li>
-              <Link to={"/userslist"}>Persons</Link>
+              {" "}
+              <a href="#contactus">Contact us</a>
+            </li>
+            <li>
+              <Link to={"/userslist"}>Chercher services</Link>
             </li>{" "}
             <li>
               {" "}
-              <Link to={"/news"}>News </Link>
+              <Link to={"/news"}> Nouveautés </Link>
             </li>
           </ul>
           <Dropdown data-bs-theme="dark">
@@ -86,97 +94,89 @@ const HomePage = () => {
           </Dropdown>
         </div>
         <div className="part1-2">
+          <img src={professimag} alt="" />
           <div className="part1-2-1">
-            <h1>Repair and Maintenance Services</h1>
+            <h1>Services de réparation et d'entretien</h1>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sunt
-              quibusdam eum id aspernatur. Optio, veniam, corrupti et quam, amet
-              quos debitis blanditiis unde in est corporis deleniti iusto eos
-              soluta laudantium fugiat possimus ipsa? Distinctio consectetur
-              doloribus deleniti reprehenderit eum provident necessitatibus
-              ducimus obcaecati dolores accusamus veniam non, natus quia sunt,
-              ullam architecto cupiditate eligendi doloremque numquam, vitae
-              alias asperiores quae aut mollitia. Non molestias laudantium
-              temporibus obcaecati, laboriosam aliquam reprehenderit,
-              dignissimos iusto, aut quod atque modi animi maxime nemo error.
-              Ipsa illum voluptatum vel praesentium? Molestiae, sunt similique
-              soluta impedit molestias repellat itaque hic culpa sapiente! Eius,
-              deleniti laboriosam!
+              Bienvenue sur notre plateforme de services à domicile, où chaque
+              aspect reflète l'essence de votre foyer. Nous nous engageons à
+              relier les propriétaires à des services fiables, offrant une gamme
+              variée de solutions, de l'entretien à l'aménagement intérieur.
+              Nous effectuons des recherches approfondies et fournissons des
+              services de manière transparente. Si vous avez des compétences
+              dans l'un de nos domaines, rejoignez-nous en vous inscrivant sur
+              notre plateforme et devenez membre d'une communauté axée sur
+              l'appartenance et l'attention aux détails. Si vous recherchez un
+              service, explorez notre plateforme sans hésitation.
             </p>
+            <Link to={"/AboutUs"}>
+              <button>En savoir plus</button>
+            </Link>
           </div>
-          <img src={imageone} alt="" />
         </div>
       </div>
-      <div className="part2">
-        <div className="part2-1">
-          <img src={repair} alt="" />
-          <h5>REPAIR</h5>
-        </div>
-        <div className="part2-1">
-          <img src={improve} alt="" />
-          <h5>IMPROVE</h5>
-        </div>
-        <div className="part2-1">
-          <img src={maintain} alt="" />
-          <h5>MAINTAIN</h5>
-        </div>
-      </div>
+
       <div className="part3" id="about">
         <div className="part3-1">
           <h2>About us</h2>
           <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Inventore
-            tempore eius, ipsa ipsum repudiandae, facilis nam sequi nesciunt
-            soluta, ex natus totam ut asperiores autem earum alias aperiam
-            praesentium aliquid.
+            Welcome to <b>ServiceME</b> platform, where we're dedicated to
+            simplifying your home service needs. Our platform was founded on the
+            principle that every homeowner deserves easy access to reliable,
+            high-quality services to maintain and enhance their living spaces.
           </p>
-          <button>Read more</button>
         </div>
         <img src={aboutimg} alt="" />
       </div>
-      <div className="part4">
-        <img src={professimag} alt="" />
-        <div className="part4-1">
-          <h2>WE PROVIDE PROFESSIONAL HOME SERVICES.</h2>
-          <p>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente
-            totam voluptates doloribus, soluta possimus, quia expedita quas
-            impedit repellendus earum commodi consequuntur illum atque iste
-            dolore ullam quod nam architecto.
-          </p>
-          <button>Read more</button>
-        </div>
-      </div>
+
       <div className="part5">
         <h1>Our Services </h1>
 
         <div className="part5-1">
           <div className="part5-1child">
+            <Link to={`/filtered/${maintenance}`}></Link>
             <img src={maintservice} alt="" />
             <p>lorem ipsum dolor sit amet.</p>{" "}
           </div>
           <div className="part5-1child">
-            <img src={electricservice} alt="" />{" "}
-            <p>Lorem ipsum dolor sit amet.</p>{" "}
+            <Link to={`/filtered/${electricien}`}>
+              <img src={electricservice} alt="" />
+              <p>electrique</p>{" "}
+            </Link>
+          </div>
+
+          <div className="part5-1child">
+            <Link to={`/filtered/${plombier}`}>
+              <img src={plumbingservice} alt="" /> <p>Plomberie</p>{" "}
+            </Link>
+          </div>
+
+          <div className="part5-1child">
+            <Link to={`/filtered/${mechanicien}`}>
+              <img src={mechanic} alt="" />
+              <p>mechanique</p>{" "}
+            </Link>
+          </div>
+
+          <div className="part5-1child">
+            <Link to={`/filtered/${architect}`}>
+              <img src={architecser} alt="" />
+              <p>Architecture</p>{" "}
+            </Link>
           </div>
           <div className="part5-1child">
-            <img src={plumbingservice} alt="" />{" "}
-            <p>Lorem ipsum dolor sit amet.</p>{" "}
+            <Link to={`/filtered/${menage}`}>
+              <img src={nettoyage} alt="" />
+              <p> Nettoyage </p>
+            </Link>
           </div>
           <div className="part5-1child">
-            <img src={mechanic} alt="" />
-            <p>Lorem ipsum dolor sit amet.</p>{" "}
-          </div>
-          <div className="part5-1child">
-            <img src={architecser} alt="" />
-            <p>Lorem ipsum dolor sit amet.</p>{" "}
-          </div>
-          <div className="part5-1child">
-            <img src={hairdressing} alt="" />
-            <p>Lorem ipsum dolor sit amet.</p>{" "}
+            <Link to={`/filtered/${coiffeur}`}>
+              <img src={hairdressing} alt="" />
+              <p>Coiffure</p>{" "}
+            </Link>
           </div>
         </div>
-        <button>Read more</button>
       </div>
       <div className="part6">
         <h1>What our clients says</h1>
@@ -187,9 +187,10 @@ const HomePage = () => {
               <div> name name</div>
             </div>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Exercitationem molestias corporis aperiam soluta maiores similique
-              aliquam aut voluptates? Molestiae, eveniet.
+              I recently used ServiceME platform to find a plumber for a leaky
+              faucet in my kitchen. The process was incredibly smooth, and I was
+              impressed by the quality of service provided. I'll definitely be
+              using this platform again for future home repair needs.
             </p>
           </div>
           <div className="part6-1">
@@ -198,9 +199,11 @@ const HomePage = () => {
               <div> name name</div>
             </div>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Exercitationem molestias corporis aperiam soluta maiores similique
-              aliquam aut voluptates? Molestiae, eveniet.
+              As a busy homeowner, I don't have the time to search for reliable
+              service providers. Thankfully, I discovered [Platform Name], and
+              it has been a game-changer! From finding a trustworthy electrician
+              to scheduling routine maintenance, this platform has made managing
+              my home so much easier.
             </p>
           </div>
           <div className="part6-1">
@@ -209,9 +212,11 @@ const HomePage = () => {
               <div> name name</div>
             </div>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Exercitationem molestias corporis aperiam soluta maiores similique
-              aliquam aut voluptates? Molestiae, eveniet.
+              I was hesitant to try a new home services platform, but I'm so
+              glad I did! Not only did I find a fantastic landscaper for my
+              backyard project, but the entire booking process was effortless.
+              Plus, the customer service team was responsive and helpful. Highly
+              recommend!
             </p>
           </div>
           <div className="part6-1">
@@ -220,9 +225,12 @@ const HomePage = () => {
               <div> name name</div>
             </div>
             <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-              Exercitationem molestias corporis aperiam soluta maiores similique
-              aliquam aut voluptates? Molestiae, eveniet.
+              I've had mixed experiences with home service providers in the
+              past, so I was pleasantly surprised by the professionalism and
+              expertise of the handyman I found through [Platform Name]. He
+              arrived on time, completed the job quickly, and even offered
+              helpful tips for future maintenance. Thank you for exceeding my
+              expectations!
             </p>
           </div>
         </div>
@@ -231,7 +239,7 @@ const HomePage = () => {
       <br />
       <br />
       <br />
-
+      <div id="contactus"></div>
       <FooterMyApp />
     </div>
   );

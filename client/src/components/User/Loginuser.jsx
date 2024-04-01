@@ -30,16 +30,24 @@ const Loginuser = () => {
       if (response.status === 200) {
         await localStorage.setItem("tokenuser", data.tokenuser);
         await localStorage.setItem("iduser", data.Response._id);
+        await localStorage.setItem("isuser", data.Response.isUser);
+        await localStorage.setItem("name", data.Response.firstname);
+        await localStorage.setItem("prenom", data.Response.lastname);
         setbad(true);
-        dispatch(changeStateUser(true));
-        console.log("connected");
-        navigator("/Dashboarduser");
+        const t = await localStorage.getItem("isuser");
+        if (t === "true") {
+          dispatch(changeStateUser(true));
+          navigator("/Dashboarduser");
+        } else {
+          console.log("comte n'est activé par l'administrateur");
+          alert("compte n'est activé par l'administrateur");
+        }
       } else {
         console.log(data);
         seterrorses(data.errors);
         console.log("you don't have account register first");
         setbad(false);
-        changeStateUser(false);
+        dispatch(changeStateUser(false));
       }
     } catch (error) {
       if (error) {
@@ -47,6 +55,7 @@ const Loginuser = () => {
       }
     }
   };
+
   return (
     <>
       <div className="container">
@@ -76,7 +85,7 @@ const Loginuser = () => {
                 <div>{bad ? null : <h6>bad credential</h6>}</div>
               </center>
               <button className="button login__submit" onClick={handlesubmit}>
-                login now{" "}
+                login now
               </button>
               <h5>
                 if you don't have account

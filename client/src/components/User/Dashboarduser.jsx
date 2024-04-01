@@ -19,11 +19,9 @@ const Dashboarduser = () => {
   const [pubs, setpubs] = useState([]);
   // logout function
   const logout = async (e) => {
-    localStorage.removeItem("tokenuser");
-    localStorage.removeItem("coordin");
-    localStorage.removeItem("iduser");
+    await localStorage.clear();
     dispatch(changeStateUser(false));
-    dispatch(changeprofil(false));
+
     navigator("/");
     alert("logout success ");
   };
@@ -31,13 +29,16 @@ const Dashboarduser = () => {
   // get publications
   const getpubs = async (e) => {
     try {
-      const res = await fetch("http://localhost:3001/pubs/allpubs", {
+      const zz = await localStorage.getItem("iduser");
+      const res = await fetch(`http://localhost:3001/pubs/${zz}`, {
         method: "GET",
       });
       const data = await res.json();
       setpubs(data.Response);
     } catch (error) {
-      console.log(error);
+      if (error) {
+        console.log(error);
+      }
     }
   };
   // end
@@ -176,15 +177,6 @@ const Dashboarduser = () => {
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Control
-                  type="password"
-                  id="password"
-                  placeholder="edit password"
-                  onChange={handlechange}
-                  autoFocus
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control
                   type="text"
                   id="specialité"
                   placeholder="edit specialité"
@@ -282,16 +274,51 @@ const Dashboarduser = () => {
 
       <div className="fatherchildren">
         <h2>publications</h2>{" "}
-        {pubs &&
-          pubs.map((pub) => {
-            return (
-              <div key={pub._id} className="children">
-                <img src={pub && pub.image1} alt="" />
-                <p>{pub.title} </p>
-                <p>{pub.content} </p>
-              </div>
-            );
-          })}
+        <div className="petitchild">
+          {pubs.length > 0 &&
+            pubs.map((pub) => {
+              return (
+                <div key={pub._id} className="children">
+                  <img src={pub && pub.image1} alt="" />
+                  <p>{pub.title} </p>
+                  <p>{pub.content} </p>
+                  <p>from {pub.fromwho}</p>
+                  <p>added in : {pub.pubdate} </p>
+                  <button
+                    onClick={async () => {
+                      try {
+                        const response = await fetch(
+                          `http://localhost:3001/pubs/${pub._id}`,
+                          {
+                            method: "DELETE",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                          }
+                        );
+                        const data = await response.json();
+                        console.log(data);
+                        if (response.status === 200) {
+                          console.log("deleted success");
+                          alert("publication suprimé avec success");
+                          window.location.reload();
+                        } else {
+                          console.log("failed delete ");
+                          alert("failed delete ");
+                        }
+                      } catch (error) {
+                        if (error) {
+                          console.log(error);
+                        }
+                      }
+                    }}
+                  >
+                    Supprimer{" "}
+                  </button>
+                </div>
+              );
+            })}
+        </div>
       </div>
       <FooterMyApp />
     </div>

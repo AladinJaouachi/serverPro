@@ -47,8 +47,20 @@ const userSchema = new Schema({
   isUser: {
     type: Boolean,
     required: true,
-    default: true,
+    default: false,
   },
+  avis: [
+    {
+      title: {
+        type: String,
+        required: true,
+      },
+      description: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
 });
 
 const user = mongoose.model("user", userSchema);

@@ -7,6 +7,44 @@
     box-shadow: 0 0 10px black;
    
 }
+.adminchoix{
+    display: flex;
+    justify-content: space-between;
+    width: 50%;
+    margin: 1% auto;
+}
+.adminchoix>*{
+    width: 45%;
+    height: 40px;
+    border-radius:5px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    -ms-border-radius:5px;
+    -o-border-radius:5px;
+}
+
+.lawla{
+    background-color: green;
+
+}
+.lawla:hover{
+    background-color: white;
+    color: green;
+    border: 2px solid green;
+}
+
+.thenya{
+    background-color: red;
+}
+.thenya:hover{
+    background-color: white;
+    color: red;
+    border: 2px solid red;
+}
+
+
+
+
 .feedhead{
     display: flex;
     justify-content: space-between;

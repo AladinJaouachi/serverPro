@@ -2,9 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 var initialState;
 const tokenuser = localStorage.getItem("tokenuser");
-tokenuser
-  ? (initialState = { value: true })
-  : (initialState = { value: false });
+const isUser = localStorage.getItem("isuser");
+
+if (tokenuser && isUser === "true") {
+  initialState = { value: true };
+} else {
+  initialState = { value: false };
+}
 
 export const userSlice = createSlice({
   name: "user",

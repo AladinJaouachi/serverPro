@@ -9,7 +9,19 @@ const pubSchema = new Schema({
   image1: {
     type: String,
   },
+  pubdate: {
+    type: Date,
+    required: true,
+  },
   content: {
+    type: String,
+    required: true,
+  },
+  fromwho: {
+    type: String,
+    required: true,
+  },
+  idperson: {
     type: String,
     required: true,
   },

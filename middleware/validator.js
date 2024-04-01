@@ -63,6 +63,11 @@ export const newfeedback = () => [
   check("message", "message is required").notEmpty(),
 ];
 
+export const avissend = () => [
+  check("title", "your name is required").notEmpty(),
+  check("description", "description is required").notEmpty(),
+];
+
 export const validation = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {

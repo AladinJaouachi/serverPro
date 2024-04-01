@@ -48,7 +48,7 @@ const Dashboard2 = () => {
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
-          <Navbar.Brand href="#">Navbar scroll</Navbar.Brand>
+          <Navbar.Brand href="#">title / brand </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -59,7 +59,7 @@ const Dashboard2 = () => {
               <Nav.Link href="#">Home</Nav.Link>
               <Nav.Link href="#">about</Nav.Link>
               <Nav.Link href="#">contact us</Nav.Link>
-              <Nav.Link href="/allfeedbacks">allfeedbacks</Nav.Link>
+              <Nav.Link href="/Demandes">Demandes</Nav.Link>
             </Nav>
 
             <button className="logout" onClick={logout}>

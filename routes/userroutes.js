@@ -3,6 +3,7 @@ const router = express.Router();
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import {
+  avissend,
   newfeedback,
   userloginrules,
   userregisterrules,
@@ -11,7 +12,10 @@ import {
 import user from "./../models/user.js";
 import verifyToken from "../middleware/isAuth.js";
 import feedback from "../models/feedback.js";
+import nodemailer from "nodemailer";
+import bodyParser from "body-parser";
 
+router.use(bodyParser.urlencoded({ extended: true }));
 router.use(express.json());
 
 // register method
@@ -144,11 +148,37 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// get users method
+// other path
+router.post("/do/:id", avissend(), validation, async (req, res) => {
+  try {
+    const userId = req.params.id;
+    const data = req.body;
+    const existingUser = await user.findByIdAndUpdate(userId, {
+      $push: { avis: data },
+    });
 
+    if (existingUser) {
+      const savedUser = await existingUser.save();
+      if (savedUser) {
+        res.status(200).send({ msg: "Update successful", Response: savedUser });
+      } else {
+        res.status(400).send({ msg: "Failed to save user" });
+      }
+    } else {
+      res.status(404).send({ msg: "User not found", Response: null });
+    }
+  } catch (error) {
+    res.status(500).send({ msg: "Failed", Response: error });
+  }
+});
+
+// get users method
+// update password
+
+// ce
 router.get("/", async (req, res) => {
   try {
-    const allofusers = await user.find({});
+    const allofusers = await user.find({ isUser: true });
     allofusers
       ? res.status(200).send({ msg: " nejem yjib", Response: allofusers })
       : res.status(400).send({ msg: "no users" });
@@ -157,18 +187,17 @@ router.get("/", async (req, res) => {
   }
 });
 
-// adding feedback
-router.post("/feedback", newfeedback(), validation, async (req, res) => {
-  const { email, subject, message } = req.body;
+// get demandes
+router.post("/a", async (req, res) => {
   try {
-    const newfeed = new feedback({ email, subject, message });
-    const aa = await newfeed.save();
-    if (aa) {
-      res.status(200).send({ msg: "sended", Response: aa });
+    const demande = await user.find({ isUser: false });
+    if (demande) {
+      res.status(200).send({ msg: " all demandes", Response: demande });
+    } else {
+      res.status(400).send({ msg: "no demandes" });
     }
   } catch (error) {
-    res.status(500).send({ msg: "failed send feedback", Response: error });
-    console.log(error);
+    res.status(500).send({ msg: "failed", Response: error });
   }
 });
 //
@@ -181,6 +210,35 @@ router.post("/currentuser", verifyToken, async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+// send mail
+router.post("/send-mail", async (req, res) => {
+  const { to, subject, text } = req.body;
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "alaajawachi5@gmail.com",
+      pass: "pyhz wrgj ryqg tefa",
+    },
+  });
+
+  const mailOptions = {
+    from: "alaajawachi5@gmail.com",
+    to: to,
+    subject: subject,
+    text: text,
+  };
+  transporter.sendMail(mailOptions, (err, info) => {
+    if (err) {
+      console.log("error sending mail");
+      res.status(500).send({ msg: "failed send", Response: err });
+    } else {
+      console.log("email sended successfully");
+      res.status(200).send({ msg: "email sendes to " + to, Response: info });
+    }
+  });
 });
 
 export default router;

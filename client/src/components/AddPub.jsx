@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import "../css/Dashboarduser.css";
 
 const AddPub = () => {
+  const n = localStorage.getItem("name");
+  const p = localStorage.getItem("prenom");
+  const idp = localStorage.getItem("iduser");
+
   const [newpub, setnewpub] = useState({
     image1: "",
+    pubdate: new Date(),
+    fromwho: `${n} ${p}`,
     title: "",
     content: "",
+    idperson: `${idp}`,
   });
+  console.log(newpub);
   const handlechange = (req, res) => {
     setnewpub({ ...newpub, [req.target.id]: req.target.value });
   };
