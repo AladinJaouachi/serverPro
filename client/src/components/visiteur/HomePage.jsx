@@ -210,7 +210,7 @@ const HomePage = () => {
               </div>
             </div>
             <p>
-              J'ai récemment utilisé la plateforme ServiceME pour trouver un
+              J'ai récemment utilisé la plateforme ProCell pour trouver un
               plombier pour une fuite robinet dans ma cuisine. Le processus
               s'est déroulé incroyablement bien et j'étais impressionné par la
               qualité du service fourni. je le serai certainement utiliser à
@@ -229,7 +229,7 @@ const HomePage = () => {
             <p>
               En tant que propriétaire occupé, il m'est souvent difficile de
               trouver du temps pour rechercher des fournisseurs de services.
-              Heureusement, j'ai découvert [Nom de la plateforme], et cela a
+              Heureusement, j'ai découvert la plateforme ProCell, et cela a
               réellement changé la donne ! De la recherche d'un électricien
               digne de confiance à la planification de la maintenance de
               routine, cette plateforme a rendu la gestion de ma maison
