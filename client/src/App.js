@@ -18,6 +18,7 @@ import ProfilUser from "./components/User/ProfilUser";
 import AboutUs from "./components/AboutUs";
 import Demandes from "./components/admin/Demandes";
 import Filtreduser from "./components/User/Filtreduser";
+import ContactPatron from "./components/ContactPatron";
 
 function App() {
   const adminprivate = useSelector((state) => state.admin.value);
@@ -69,6 +70,14 @@ function App() {
         <Route path="/:id" element={<ProfilUser />} />
         <Route path="/AboutUs" element={<AboutUs />} />
         <Route path="/filtered/:service" element={<Filtreduser />} />
+        <Route
+          path="/ContactPatron"
+          element={
+            <ProtectedRouteadmin isAllowed={adminprivate}>
+              <ContactPatron />
+            </ProtectedRouteadmin>
+          }
+        />
       </Routes>
     </div>
   );

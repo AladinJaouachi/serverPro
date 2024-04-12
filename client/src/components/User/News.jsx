@@ -17,7 +17,7 @@ const News = () => {
     getpubs();
   }, []);
   return (
-    <div>
+    <div className="news">
       <center>
         <h5>Nouveautés</h5>
       </center>
@@ -31,8 +31,10 @@ const News = () => {
                 <p>{pub.pubdate} </p>
                 <hr width="90%" />
                 <img src={pub.image1} alt="" />
-                <h3>{pub.title} </h3>
-                <h3>{pub.content} </h3>
+                <h4>{pub.title} </h4>
+                <center>
+                  <h6>{pub.content} </h6>
+                </center>
               </div>
             );
           })}

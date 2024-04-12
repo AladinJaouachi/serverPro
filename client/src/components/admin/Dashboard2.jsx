@@ -51,7 +51,7 @@ const Dashboard2 = () => {
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
-          <Navbar.Brand className=" ourbrand">
+          <Navbar.Brand className="ourbrand">
             {" "}
             <img src={logo} alt="" />{" "}
           </Navbar.Brand>
@@ -62,10 +62,18 @@ const Dashboard2 = () => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="/Dashboardadmin ">Acceuil</Nav.Link>
-              <Nav.Link href="#">Contacter patron</Nav.Link>
-              <Nav.Link href="#">Abonnements</Nav.Link>
-              <Nav.Link href="/Demandes">Demandes</Nav.Link>
+              <Nav.Link className="naviget" href="/Dashboardadmin ">
+                Acceuil
+              </Nav.Link>
+              <Nav.Link className="naviget" href="/ContactPatron">
+                Contacter patron
+              </Nav.Link>
+              <Nav.Link className="naviget" href="#">
+                Abonnements
+              </Nav.Link>
+              <Nav.Link className="naviget" href="/Demandes">
+                Demandes
+              </Nav.Link>
             </Nav>
 
             <button className="logout" onClick={logout}>
@@ -137,9 +145,9 @@ const Dashboard2 = () => {
                     <figure>
                       <img src={filtereduser.image} alt="" />
                     </figure>
-                    <h2>{filtereduser.firstname}</h2>
-                    <h2>{filtereduser.lastname}</h2>
-                    <h2>{filtereduser.specialité}</h2>
+                    <h3>{filtereduser.firstname}</h3>
+                    <h3>{filtereduser.lastname}</h3>
+                    <h3>{filtereduser.specialité}</h3>
                     <p>{filtereduser.age} ans </p>
                     <p>{filtereduser.avis.length} avis </p>
                   </Link>

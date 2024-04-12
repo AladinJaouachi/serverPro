@@ -134,3 +134,14 @@ p{
     text-align: left;
     margin-left: 3%;
 }
+
+.children h4{
+    color: black;
+}
+
+.news h5{
+    margin: 1% 0;
+}
+.children img{
+    padding: 0 5%;
+}

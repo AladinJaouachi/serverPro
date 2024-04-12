@@ -52,9 +52,9 @@ const Userlist = () => {
                     <figure>
                       <img src={filtereduser.image} alt="" />
                     </figure>
-                    <h2>{filtereduser.firstname}</h2>
-                    <h2>{filtereduser.lastname}</h2>
-                    <h2>{filtereduser.specialité}</h2>
+                    <h3>{filtereduser.firstname}</h3>
+                    <h3>{filtereduser.lastname}</h3>
+                    <h3>{filtereduser.specialité}</h3>
                     <p>{filtereduser.age} ans </p>
                     <p>{filtereduser.avis.length} avis </p>
                   </Link>

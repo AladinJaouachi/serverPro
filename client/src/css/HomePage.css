@@ -13,15 +13,17 @@
 }
 
 .part1-1{
+ 
     display: flex;
     justify-content: space-between;
-    padding: 2%;
+    padding: 1%;
     align-items: center;
     width: 100%;
+    height: 50px;
 }
 .part1-1 img{
-    width: 200px;
-    height: 90px;
+    width: 170px;
+    height: 48px;
 }
 
 
@@ -29,11 +31,13 @@
     width: 60%;
     display: flex;
     justify-content: space-between;
+  
 }
 .part1-1 ul li{
    
     text-decoration:none !important;
     list-style: none;
+   
 }
 .part1-1 ul li a{
     text-decoration: none !important;
@@ -46,6 +50,9 @@
 }
 .part1-2{
     display: flex;
+}
+.part1-2 img{
+    width: 35%;
 }
 .part1-2-1{
   
@@ -169,7 +176,7 @@
 }
 .part5 h1{
     font-weight: bold;
-    margin: 60px 0;
+    margin: 10px 0;
 }
 .part5 button{
     margin-top: 2%;
@@ -199,7 +206,8 @@
     box-shadow: 0 0 10px black;
     width: 25%;
     margin: 1%;
-    padding: 2%;
+    padding: 1%;
+    height: 10%;
 }
 
 .part5-1child a{
@@ -219,7 +227,7 @@
 
 .part5-1child img{
     width:70%;
-    height:70%;
+    height:90px;
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;

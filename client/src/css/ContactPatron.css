@@ -1,0 +1,37 @@
+.ContactPatron{
+    background-color: rgb(253, 253, 253);
+    border: 2px solid black;
+    box-shadow: 0 0 10px blue;
+    width: 60%;
+    margin: 2% auto;
+    padding: 2%;
+    text-align: center;
+}
+.ContactPatron button{
+    width: 30%;
+    border-radius: 10px;
+    color: white;
+    background-color: green;
+    border: 2px solid white;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+.ContactPatron button:hover{
+    background-color:white;
+    color: green;
+    border: 2px solid green;
+}
+.ContactPatron input{
+    border: 2px solid black;
+    box-shadow: 0 0 10px white;
+}
+.ContactPatron input:hover{
+    border: 2px solid blue;
+    background-color: bisque;
+}
+.ContactPatron h1{
+    font-family: 'Courier New', Courier, monospace  ;
+    font-weight: bold;
+}

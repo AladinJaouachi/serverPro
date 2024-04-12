@@ -32,7 +32,6 @@ const Demandes = () => {
 
   return (
     <div>
-      <div className="feedhead"></div>
       <p>Tous les demandes </p>
       <div className="feeds">
         {allfeeds ? (

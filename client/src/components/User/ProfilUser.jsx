@@ -266,8 +266,8 @@ const ProfilUser = () => {
         </Modal>
         <div className="babah">
           <div className="entetes">
-            <h4>Avis </h4>
-            {getstat.avis && <h4>({getstat.avis.length}) : </h4>}
+            <h6>Avis </h6>
+            {getstat.avis && <h6>({getstat.avis.length}) : </h6>}
           </div>
 
           {getstat.avis &&

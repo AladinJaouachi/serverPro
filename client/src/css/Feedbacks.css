@@ -47,10 +47,9 @@
 
 
 
-.feedhead{
+.feeds{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-wrap: wrap-reverse
 }
 .feedhead button{
     width: 20%;
@@ -67,4 +66,18 @@
     background-color: white;
     color: red;
     border: 2px solid red;
+}
+
+.bg-body-tertiary{
+    box-shadow: 0 0  10px red;
+}
+
+.ourbrand img{
+
+    width:100%;
+    height:80px;
+}
+
+.naviget{
+    color:black;
 }
