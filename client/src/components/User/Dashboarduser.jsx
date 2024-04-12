@@ -135,7 +135,7 @@ const Dashboarduser = () => {
       <div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>edit account</Modal.Title>
+            <Modal.Title>Modifier profile</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
@@ -152,7 +152,7 @@ const Dashboarduser = () => {
                 <Form.Control
                   type="text"
                   id="firstname"
-                  placeholder="edit firstname"
+                  placeholder="modifier nom"
                   onChange={handlechange}
                   autoFocus
                 />
@@ -161,7 +161,7 @@ const Dashboarduser = () => {
                 <Form.Control
                   type="text"
                   id="lastname"
-                  placeholder="edit lastname"
+                  placeholder="modifier prenom"
                   onChange={handlechange}
                   autoFocus
                 />
@@ -170,7 +170,7 @@ const Dashboarduser = () => {
                 <Form.Control
                   type="email"
                   id="email"
-                  placeholder="edit email"
+                  placeholder="modifier email"
                   onChange={handlechange}
                   autoFocus
                 />
@@ -179,7 +179,7 @@ const Dashboarduser = () => {
                 <Form.Control
                   type="text"
                   id="specialité"
-                  placeholder="edit specialité"
+                  placeholder="modifier specialité"
                   onChange={handlechange}
                   autoFocus
                 />
@@ -188,7 +188,7 @@ const Dashboarduser = () => {
                 <Form.Control
                   type="number"
                   id="age"
-                  placeholder="edit age"
+                  placeholder="modifier age"
                   onChange={handlechange}
                   autoFocus
                 />
@@ -197,7 +197,7 @@ const Dashboarduser = () => {
                 <Form.Control
                   type="number"
                   id="phone"
-                  placeholder="edit phone"
+                  placeholder="modifier numero de Tel"
                   onChange={handlechange}
                   autoFocus
                 />
@@ -206,7 +206,7 @@ const Dashboarduser = () => {
                 <Form.Control
                   type="text"
                   id="place"
-                  placeholder="edit place"
+                  placeholder="modifier la place"
                   onChange={handlechange}
                   autoFocus
                 />
@@ -215,7 +215,7 @@ const Dashboarduser = () => {
                 <Form.Control
                   type="text"
                   id="gender"
-                  placeholder="edit gender"
+                  placeholder="Modifier genre"
                   onChange={handlechange}
                   autoFocus
                 />
@@ -224,7 +224,7 @@ const Dashboarduser = () => {
           </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={handleClose}>
-              Close
+              Annuler
             </Button>
             <Button
               variant="success"
@@ -233,7 +233,7 @@ const Dashboarduser = () => {
                 handleClose();
               }}
             >
-              Save Changes
+              Enregistrer
             </Button>
           </Modal.Footer>
         </Modal>
@@ -279,11 +279,13 @@ const Dashboarduser = () => {
             pubs.map((pub) => {
               return (
                 <div key={pub._id} className="children">
+                  <p>from : {pub.fromwho}</p>
+                  <p>added in : {pub.pubdate} </p>
+                  <hr width="90%" />
                   <img src={pub && pub.image1} alt="" />
                   <p>{pub.title} </p>
                   <p>{pub.content} </p>
-                  <p>from {pub.fromwho}</p>
-                  <p>added in : {pub.pubdate} </p>
+
                   <button
                     onClick={async () => {
                       try {

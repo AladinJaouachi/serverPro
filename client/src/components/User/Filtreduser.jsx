@@ -36,23 +36,31 @@ const Filtreduser = () => {
   console.log(hethom);
   return (
     <div>
-      <h1>{param.service}s</h1>
+      <center>
+        <h1>Nos {param.service}s</h1>
+      </center>
       <div className="fatheradmin">
-        {hethom.map((e) => {
-          return (
-            <article key={e._id}>
-              <Link to={`/${e._id}`}>
-                <figure>
-                  <img src={e.image} alt="" />
-                </figure>
-                <h2>{e.firstname}</h2>
-                <h2>{e.lastname}</h2>
-                <h2>{e.specialité}</h2>
-                <p>{e.age} ans </p>
-              </Link>
-            </article>
-          );
-        })}
+        {hethom.length > 0 ? (
+          hethom.map((e) => {
+            return (
+              <article key={e._id}>
+                <Link to={`/${e._id}`}>
+                  <figure>
+                    <img src={e.image} alt="" />
+                  </figure>
+                  <h2>{e.firstname}</h2>
+                  <h2>{e.lastname}</h2>
+                  <h2>{e.specialité}</h2>
+                  <p>{e.age} ans </p>
+                </Link>
+              </article>
+            );
+          })
+        ) : (
+          <center>
+            <h3>no service</h3>
+          </center>
+        )}
       </div>
     </div>
   );

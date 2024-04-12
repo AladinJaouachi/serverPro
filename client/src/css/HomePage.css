@@ -19,6 +19,12 @@
     align-items: center;
     width: 100%;
 }
+.part1-1 img{
+    width: 200px;
+    height: 90px;
+}
+
+
 .part1-1 ul{
     width: 60%;
     display: flex;
@@ -33,6 +39,7 @@
     text-decoration: none !important;
     color: black;
 }
+
 
 .part1-1 button a{
     text-decoration: none;

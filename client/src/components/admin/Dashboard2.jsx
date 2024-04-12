@@ -7,6 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { useDispatch } from "react-redux";
 import { changestateadmin } from "../../Redux/slice/Adminslice";
 import "../../css/Dashboardadmin.css";
+import logo from "../../images/logo.jpg";
 
 const Dashboard2 = () => {
   const dispatch = useDispatch();
@@ -15,6 +16,8 @@ const Dashboard2 = () => {
   const [users, setusers] = useState("");
 
   const [filtered, setfiltred] = useState("");
+  const [filt, setfilt] = useState("");
+  const [filt2, setfilt2] = useState("");
 
   const getusers = async () => {
     try {
@@ -48,7 +51,10 @@ const Dashboard2 = () => {
     <>
       <Navbar expand="lg" className="bg-body-tertiary">
         <Container fluid>
-          <Navbar.Brand href="#">title / brand </Navbar.Brand>
+          <Navbar.Brand className=" ourbrand">
+            {" "}
+            <img src={logo} alt="" />{" "}
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
             <Nav
@@ -56,14 +62,14 @@ const Dashboard2 = () => {
               style={{ maxHeight: "100px" }}
               navbarScroll
             >
-              <Nav.Link href="#">Home</Nav.Link>
-              <Nav.Link href="#">about</Nav.Link>
-              <Nav.Link href="#">contact us</Nav.Link>
+              <Nav.Link href="/Dashboardadmin ">Acceuil</Nav.Link>
+              <Nav.Link href="#">Contacter patron</Nav.Link>
+              <Nav.Link href="#">Abonnements</Nav.Link>
               <Nav.Link href="/Demandes">Demandes</Nav.Link>
             </Nav>
 
             <button className="logout" onClick={logout}>
-              Logout
+              Deconnexion
             </button>
           </Navbar.Collapse>
         </Container>
@@ -73,12 +79,36 @@ const Dashboard2 = () => {
         <Form className="d-flex">
           <Form.Control
             type="search"
-            placeholder="Search user"
+            placeholder="recherche patron"
             className="me-2"
             aria-label="Search"
             onChange={(e) => setfiltred(e.target.value)}
           />
         </Form>
+      </div>
+      <div className="searchit">
+        <div className="searchuser1">
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="recherche avec place"
+              className="me-2"
+              aria-label="Search"
+              onChange={(e) => setfilt(e.target.value)}
+            />
+          </Form>
+        </div>
+        <div className="searchuser1">
+          <Form className="d-flex">
+            <Form.Control
+              type="search"
+              placeholder="recherche avec email"
+              className="me-2"
+              aria-label="Search"
+              onChange={(e) => setfilt2(e.target.value)}
+            />
+          </Form>
+        </div>
       </div>
 
       <div className="fatheradmin">
@@ -86,12 +116,18 @@ const Dashboard2 = () => {
           users
             .filter((user) => {
               return (
-                user.firstname.toLowerCase().includes(filtered.toLowerCase()) ||
-                user.lastname.toLowerCase().includes(filtered.toLowerCase()) ||
-                user.specialité
+                (user.firstname
                   .toLowerCase()
                   .includes(filtered.toLowerCase()) ||
-                user.age.toString().includes(filtered.toLowerCase())
+                  user.lastname
+                    .toLowerCase()
+                    .includes(filtered.toLowerCase()) ||
+                  user.specialité
+                    .toLowerCase()
+                    .includes(filtered.toLowerCase()) ||
+                  user.age.toString().includes(filtered.toLowerCase())) &&
+                user.place.toLowerCase().includes(filt.toLowerCase()) &&
+                user.email.toLowerCase().includes(filt2.toLowerCase())
               );
             })
             .map((filtereduser) => {
@@ -105,6 +141,7 @@ const Dashboard2 = () => {
                     <h2>{filtereduser.lastname}</h2>
                     <h2>{filtereduser.specialité}</h2>
                     <p>{filtereduser.age} ans </p>
+                    <p>{filtereduser.avis.length} avis </p>
                   </Link>
                 </article>
               );

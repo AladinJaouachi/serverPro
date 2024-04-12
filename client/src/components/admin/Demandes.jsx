@@ -32,9 +32,7 @@ const Demandes = () => {
 
   return (
     <div>
-      <div className="feedhead">
-        <h1>Demandes</h1>
-      </div>
+      <div className="feedhead"></div>
       <p>Tous les demandes </p>
       <div className="feeds">
         {allfeeds ? (
@@ -90,6 +88,7 @@ const Demandes = () => {
                             console.log(data);
                             if (response.status === 200) {
                               alert("compte activé et mail envoyé");
+                              window.location.reload();
                             } else {
                               console.log("failed send mail");
                             }
@@ -97,7 +96,7 @@ const Demandes = () => {
                             console.log("failed send mail");
                           }
                         };
-                        console.log(data);
+
                         // window.location.reload();
                         sendit();
                       } else {
@@ -124,11 +123,40 @@ const Demandes = () => {
                     );
                     const data = await response.json();
                     if (response.status === 200) {
-                      alert("delete success");
+                      const sendrefusé = async () => {
+                        try {
+                          const response = await fetch(
+                            "http://localhost:3001/user/send-mail",
+                            {
+                              method: "POST",
+                              headers: {
+                                "Content-Type": "application/json",
+                              },
+                              body: await JSON.stringify({
+                                to: el.email,
+                                subject: "Compte refusé",
+                                text: "votre demande a été refusé par l'administrateur du site ProCell Plateform",
+                              }),
+                            }
+                          );
+                          const data = await response.json();
+                          console.log(data);
+                          if (response.status === 200) {
+                            alert("compte refusé et mail envoyé");
+                            window.location.reload();
+                          } else {
+                            console.log("failed send mail");
+                          }
+                        } catch (error) {
+                          console.log(error);
+                        }
+                      };
+                      sendrefusé();
+
                       window.location.reload();
                     } else {
                       alert(
-                        "delete failed or maybe no feedbacks to delete it  , retry again "
+                        "suppresiion a été echoué refraicher s'il vous plait "
                       );
                     }
                   }}

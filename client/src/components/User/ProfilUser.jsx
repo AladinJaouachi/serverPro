@@ -8,7 +8,7 @@ import Modal from "react-bootstrap/Modal";
 const ProfilUser = () => {
   const navigator = useNavigate();
   const [getstat, setgetstat] = useState("");
-  const [getavis, setgetavis] = useState("");
+
   const url = useParams().id;
   const token = localStorage.getItem("token");
 
@@ -41,10 +41,10 @@ const ProfilUser = () => {
       });
       const data = await response.json();
       if (response.status === 200) {
-        alert("user deleted successfully");
+        alert("utilisateur supprimé");
         navigator("/Dashboardadmin");
       } else {
-        alert("deleted failed , retry again ! ");
+        alert("suppression echoué ");
       }
     } catch (error) {
       console.log(error);
@@ -119,13 +119,12 @@ const ProfilUser = () => {
     });
   }
 
-  function handleChange1(event) {
+  function handleChange1(event1) {
     settosend({
       ...tosend,
-      text: event,
+      text: event1,
     });
   }
-  console.log(tosend);
 
   const sendmail = async () => {
     try {
@@ -134,13 +133,18 @@ const ProfilUser = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: await JSON.stringify(tosend),
+        body: await JSON.stringify({
+          to: tosend.to,
+          subject: tosend.subject,
+          text: "votre nouveau mot de passe est : " + tosend.text,
+        }),
       });
 
       if (response.status === 200) {
         console.log("mail sent");
-        alert("mail sent");
+        alert("mot de passe a été change et l'email envoyé");
         console.log(response);
+        window.location.reload();
       } else {
         console.log("mail not sent");
       }
@@ -169,8 +173,6 @@ const ProfilUser = () => {
         console.log(handleChange1);
         console.log("tbedel");
         console.log("new pass", data);
-        alert("password modified successfully");
-
         await sendmail();
       } else {
         alert("modified failed , retry again ! ");
@@ -186,23 +188,29 @@ const ProfilUser = () => {
     <div>
       <div className="myuser">
         <img src={getstat.image} alt="" />
-        <h4>first name : {getstat.firstname} </h4>
-        <h4> last name :{getstat.lastname} </h4>
+        <h4>Nom: {getstat.firstname} </h4>
+        <h4> Prenom:{getstat.lastname} </h4>
         <h4>specialité : {getstat.specialité} </h4>
         <hr />
         <h4>Email : {getstat.email} </h4>
-        <h4>phone number : {getstat.phone} </h4>
-        <h4>gender : {getstat.gender} </h4>
-        <h4>adress : {getstat.place} </h4>
+        <h4>Numero de Tel : {getstat.phone} </h4>
+        <h4>genre : {getstat.gender} </h4>
+        <h4>adresse : {getstat.place} </h4>
         <h4>age : {getstat.age} </h4>
-        {token && <label htmlFor="">modifier mdp : </label>}
-        {token && <input type="text" onChange={handlechangepass} />}
+
+        {token && (
+          <input
+            type="text"
+            placeholder="modifier mdp :"
+            onChange={handlechangepass}
+          />
+        )}
         {token && (
           <Button variant="primary" onClick={modifpass}>
             changer mdp
           </Button>
         )}
-        {token && <Button onClick={deleteuser}>delete user </Button>}
+        {token && <Button onClick={deleteuser}>supprimer compte </Button>}
 
         {!token && (
           <Button variant="primary" onClick={handleShow}>
@@ -257,13 +265,53 @@ const ProfilUser = () => {
           </Modal.Body>
         </Modal>
         <div className="babah">
-          <h4>Avis : </h4>
+          <div className="entetes">
+            <h4>Avis </h4>
+            {getstat.avis && <h4>({getstat.avis.length}) : </h4>}
+          </div>
+
           {getstat.avis &&
             getstat.avis.map((item) => {
               return (
-                <div className="weldeh" key={item.id}>
-                  <p>{item.title} </p>
-                  <p> {item.description} </p>
+                <div className="weldeh" key={item._id}>
+                  <div className="weldweld" width="100%">
+                    <p>{item.title} </p>
+                    <p> {item.description} </p>
+                  </div>
+                  {token && (
+                    <button
+                      onClick={async () => {
+                        console.log(url);
+                        console.log(item._id);
+                        try {
+                          const response = await fetch(
+                            `http://localhost:3001/feeds/delete/${url}`,
+                            {
+                              method: "POST",
+                              headers: {
+                                "Content-Type": "application/json",
+                              },
+                              body: JSON.stringify({ idavis: item._id }),
+                            }
+                          );
+                          const data = await response.json();
+                          console.log(data);
+
+                          if (response.status === 200) {
+                            alert("avis supprimé");
+                            window.location.reload();
+                          } else {
+                            alert("suppression echoué");
+                          }
+                        } catch (error) {
+                          console.log(error);
+                        }
+                      }}
+                    >
+                      {" "}
+                      X{" "}
+                    </button>
+                  )}
                 </div>
               );
             })}

@@ -18,16 +18,21 @@ const News = () => {
   }, []);
   return (
     <div>
-      <p>this is news list </p>
+      <center>
+        <h5>Nouveautés</h5>
+      </center>
       <div className="fatherchildren">
         {" "}
         {pubs &&
           pubs.map((pub) => {
             return (
               <div key={pub._id} className="children">
-                <img src={pub.image} alt="" />
-                <p>{pub.title} </p>
-                <p>{pub.content} </p>
+                <p>De : {pub.fromwho}</p>
+                <p>{pub.pubdate} </p>
+                <hr width="90%" />
+                <img src={pub.image1} alt="" />
+                <h3>{pub.title} </h3>
+                <h3>{pub.content} </h3>
               </div>
             );
           })}

@@ -35,11 +35,11 @@ const Registeruser = () => {
         console.log("hethi response ", response);
         console.log("hethi data", data);
         setbad(true);
-        alert("your register success");
+        alert("inscription reussite");
         navigator("/Loginuser");
       } else {
         console.log(data.errors);
-        alert("your register failed ");
+        alert("l'inscription a échoué");
         setbad(false);
       }
     } catch (error) {
@@ -54,14 +54,14 @@ const Registeruser = () => {
           <div className="form-holder">
             <div className="form-content">
               <div className="form-items">
-                <h3>Register Today</h3>
+                <h3>S'inscrire maintenant</h3>
                 <form className="requires-validation">
                   <div className="col-md-12">
                     <input
                       className="form-control"
                       type="text"
                       id="firstname"
-                      placeholder="firstname"
+                      placeholder="Nom"
                       required
                       onChange={handlechange}
                     />
@@ -71,7 +71,7 @@ const Registeruser = () => {
                       className="form-control"
                       type="text"
                       id="lastname"
-                      placeholder="lastname"
+                      placeholder="Prenom"
                       required
                       onChange={handlechange}
                     />
@@ -91,7 +91,7 @@ const Registeruser = () => {
                       className="form-control"
                       type="password"
                       id="password"
-                      placeholder="Password"
+                      placeholder="Mot de passe"
                       required
                       onChange={handlechange}
                     />
@@ -121,15 +121,18 @@ const Registeruser = () => {
                       className="form-control"
                       type="number"
                       id="phone"
-                      placeholder="phone"
+                      placeholder="Numero du Tel"
                       required
                       onChange={handlechange}
                     />
                   </div>
                   <div>
-                    <span>gender</span>
-                    <select id="gender" onChange={handlechange}>
-                      <option value=""></option>
+                    <select
+                      id="gender"
+                      placeholder="Genre"
+                      onChange={handlechange}
+                    >
+                      <option value="">Genre</option>
                       <option value="male">male</option>
                       <option value="female">female</option>
                     </select>
@@ -146,11 +149,11 @@ const Registeruser = () => {
                   </div>
                   <div className="form-button mt-3">
                     <button id="submit" type="submit" onClick={handlesubmit}>
-                      Register
+                      S'inscrire
                     </button>
 
                     <center>
-                      <h4>{bad ? null : <h4>bad credential </h4>}</h4>
+                      <h4>{bad ? null : <h4>Mauvaise identification </h4>}</h4>
                     </center>
                   </div>
                 </form>

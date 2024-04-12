@@ -41,6 +41,7 @@ const Loginuser = () => {
         } else {
           console.log("comte n'est activé par l'administrateur");
           alert("compte n'est activé par l'administrateur");
+          localStorage.clear();
         }
       } else {
         console.log(data);
@@ -48,6 +49,7 @@ const Loginuser = () => {
         console.log("you don't have account register first");
         setbad(false);
         dispatch(changeStateUser(false));
+        localStorage.clear();
       }
     } catch (error) {
       if (error) {

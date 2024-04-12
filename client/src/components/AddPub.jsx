@@ -44,7 +44,7 @@ const AddPub = () => {
   };
   return (
     <div className="addpub">
-      <h5>Add Pub</h5>
+      <h5>Ajouter publication</h5>
       <input
         type="text"
         placeholder="image"
@@ -53,18 +53,18 @@ const AddPub = () => {
       />
       <input
         type="text"
-        placeholder="tittle of pub"
+        placeholder="titre"
         id="title"
         onChange={handlechange}
       />
       <input
         type="text"
-        placeholder="content"
+        placeholder="contenu"
         id="content"
         onChange={handlechange}
       />
       <button className="sharepub" onClick={handlesubmit}>
-        Share
+        Publier
       </button>
     </div>
   );

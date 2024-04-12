@@ -25,6 +25,7 @@
 
 .lawla{
     background-color: green;
+    color: white;
 
 }
 .lawla:hover{
@@ -35,6 +36,7 @@
 
 .thenya{
     background-color: red;
+    color: white;
 }
 .thenya:hover{
     background-color: white;

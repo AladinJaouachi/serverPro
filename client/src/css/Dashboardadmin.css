@@ -86,17 +86,20 @@ article h2,p{
 }
 .logout{
     width: 300px;
+    height: 50px;
+    background-color: red;
 }
 .searchuser{
     width: 50%;
     margin: 1% auto;
+   
     
 }
 .bg-body-tertiary button{
     background-color: white;
     color: blue;
     border: 2px solid black;
-    width: 10%;
+    width: 15%;
     border-radius: 10px;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
@@ -108,6 +111,35 @@ article h2,p{
     color: white;
 }
 
+.searchuser1{
+    width:45%;
+    margin: 0 auto;
+}
 
+.searchit{
+  
+    width: 50%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
 
+.me-2{
+    border: 2px solid black;
+    box-shadow: 0 0 10px blue;
+ 
+}
 
+.ourbrand img{
+width: 170px;
+height: 100px;
+}
+.ourbrand {
+margin-right:auto
+}
+
+.me-auto{
+    margin-left: auto;
+    margin-right: auto;
+   
+}

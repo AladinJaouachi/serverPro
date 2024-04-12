@@ -26,10 +26,10 @@ const Userlist = () => {
   });
   return (
     <div className="userlist">
-      <p>this is our userlist </p>
+      <p>Liste des Services </p>
       <input
         type="text"
-        placeholder="search user "
+        placeholder="Chercher service"
         onChange={(e) => setfiltred(e.target.value)}
       />
       <div className="fatheradmin">
@@ -56,6 +56,7 @@ const Userlist = () => {
                     <h2>{filtereduser.lastname}</h2>
                     <h2>{filtereduser.specialité}</h2>
                     <p>{filtereduser.age} ans </p>
+                    <p>{filtereduser.avis.length} avis </p>
                   </Link>
                 </article>
               );

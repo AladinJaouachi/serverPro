@@ -9,7 +9,6 @@ import electricservice from "../../images/electricservice.png";
 import plumbingservice from "../../images/plumbingservice.png";
 import mechanic from "../../images/repaircar.png";
 import architecser from "../../images/architectservice.png";
-import hairdressing from "../../images/hairdressing.png";
 import client1 from "../../images/client1.jpeg";
 import client2 from "../../images/client2.jpeg";
 import client3 from "../../images/client3.jpeg";
@@ -21,13 +20,14 @@ import { Link } from "react-router-dom";
 
 import Dropdown from "react-bootstrap/Dropdown";
 import FooterMyApp from "./../FooterMyApp";
+import logo from "../../images/logo.jpg";
 
 const HomePage = () => {
   const plombier = "plombier";
   const mechanicien = "mechanicien";
   const electricien = "electricien";
   const architect = "architect";
-  const coiffeur = "coiffeur";
+
   const menage = "menage";
   const maintenance = "maintenance";
   return (
@@ -36,7 +36,7 @@ const HomePage = () => {
         <h6>
           {" "}
           <FontAwesomeIcon icon={faPhone} style={{ color: "#FFD43B" }} />
-          call : 96931269
+          Tel: 96931269
         </h6>
         <h6>
           <FontAwesomeIcon icon={faEnvelope} style={{ color: "#FFD43B" }} />
@@ -46,18 +46,18 @@ const HomePage = () => {
 
       <div className="part1">
         <div className="part1-1">
-          <h3>Title</h3>
+          <img src={logo} alt="" />
           <ul>
             <li>
               {" "}
-              <Link to={"/"}>Home </Link>
+              <Link to={"/"}>Acceuil</Link>
             </li>
             <li>
-              <a href="#about">About</a>
+              <a href="#about">A propos</a>
             </li>
             <li>
               {" "}
-              <a href="#contactus">Contact us</a>
+              <a href="#contactus">Contact</a>
             </li>
             <li>
               <Link to={"/userslist"}>Chercher services</Link>
@@ -118,25 +118,52 @@ const HomePage = () => {
 
       <div className="part3" id="about">
         <div className="part3-1">
-          <h2>About us</h2>
+          <h2>A propos</h2>
           <p>
-            Welcome to <b>ServiceME</b> platform, where we're dedicated to
-            simplifying your home service needs. Our platform was founded on the
-            principle that every homeowner deserves easy access to reliable,
-            high-quality services to maintain and enhance their living spaces.
+            Nous avons pour objectif de simplifier l'accès à une gamme de
+            services essentiels pour les foyers, couvrant des besoins variés
+            tels que{" "}
+            <u>
+              <b> la maintenance</b>
+            </u>
+            ,{" "}
+            <u>
+              <b>l'architecture</b>
+            </u>
+            ,
+            <u>
+              <b>la plomberie</b>
+            </u>
+            ,{" "}
+            <u>
+              <b>l'électricité</b>
+            </u>
+            ,{" "}
+            <u>
+              {" "}
+              <b>le nettoyage</b>
+            </u>
+            et{" "}
+            <u>
+              <b>la mécanique</b>
+            </u>
+            . Notre engagement est de fournir des solutions de qualité dans ces
+            domaines, afin de répondre aux besoins quotidiens des utilisateurs
+            et d'améliorer leur qualité de vie.
           </p>
         </div>
         <img src={aboutimg} alt="" />
       </div>
 
       <div className="part5">
-        <h1>Our Services </h1>
+        <h1>Notre Services </h1>
 
         <div className="part5-1">
           <div className="part5-1child">
-            <Link to={`/filtered/${maintenance}`}></Link>
-            <img src={maintservice} alt="" />
-            <p>lorem ipsum dolor sit amet.</p>{" "}
+            <Link to={`/filtered/${maintenance}`}>
+              <img src={maintservice} alt="" />
+              <p>technicien de maintenance</p>{" "}
+            </Link>
           </div>
           <div className="part5-1child">
             <Link to={`/filtered/${electricien}`}>
@@ -170,67 +197,79 @@ const HomePage = () => {
               <p> Nettoyage </p>
             </Link>
           </div>
-          <div className="part5-1child">
-            <Link to={`/filtered/${coiffeur}`}>
-              <img src={hairdressing} alt="" />
-              <p>Coiffure</p>{" "}
-            </Link>
-          </div>
         </div>
       </div>
       <div className="part6">
-        <h1>What our clients says</h1>
+        <h1>Meilleurs avis des clients</h1>
         <div className="part6father">
           <div className="part6-1">
             <div className="part6-1child">
               <img src={client1} alt="" />
-              <div> name name</div>
+              <div>
+                <b>test name</b>{" "}
+              </div>
             </div>
             <p>
-              I recently used ServiceME platform to find a plumber for a leaky
-              faucet in my kitchen. The process was incredibly smooth, and I was
-              impressed by the quality of service provided. I'll definitely be
-              using this platform again for future home repair needs.
+              J'ai récemment utilisé la plateforme ServiceME pour trouver un
+              plombier pour une fuite robinet dans ma cuisine. Le processus
+              s'est déroulé incroyablement bien et j'étais impressionné par la
+              qualité du service fourni. je le serai certainement utiliser à
+              nouveau cette plate-forme pour de futurs besoins de réparation de
+              maison.
             </p>
           </div>
           <div className="part6-1">
             <div className="part6-1child">
               <img src={client2} alt="" />
-              <div> name name</div>
+              <div>
+                {" "}
+                <b>test name</b>
+              </div>
             </div>
             <p>
-              As a busy homeowner, I don't have the time to search for reliable
-              service providers. Thankfully, I discovered [Platform Name], and
-              it has been a game-changer! From finding a trustworthy electrician
-              to scheduling routine maintenance, this platform has made managing
-              my home so much easier.
+              En tant que propriétaire occupé, il m'est souvent difficile de
+              trouver du temps pour rechercher des fournisseurs de services.
+              Heureusement, j'ai découvert [Nom de la plateforme], et cela a
+              réellement changé la donne ! De la recherche d'un électricien
+              digne de confiance à la planification de la maintenance de
+              routine, cette plateforme a rendu la gestion de ma maison
+              tellement plus facile.
             </p>
           </div>
           <div className="part6-1">
             <div className="part6-1child">
               <img src={client3} alt="" />
-              <div> name name</div>
+              <div>
+                {" "}
+                <b>test name</b>
+              </div>
             </div>
             <p>
-              I was hesitant to try a new home services platform, but I'm so
-              glad I did! Not only did I find a fantastic landscaper for my
-              backyard project, but the entire booking process was effortless.
-              Plus, the customer service team was responsive and helpful. Highly
-              recommend!
+              J'avais des doutes quant à l'utilisation d'une nouvelle plateforme
+              de services à domicile, mais je suis vraiment ravi de l'avoir
+              essayée ! Non seulement j'ai trouvé un paysagiste fantastique pour
+              mon projet d'arrière-cour, mais tout le processus de réservation
+              s'est déroulé sans aucun problème. De plus, l'équipe du service
+              client a été très réactive et serviable. Je la recommande vivement
+              !
             </p>
           </div>
           <div className="part6-1">
             <div className="part6-1child">
               <img src={client4} alt="" />
-              <div> name name</div>
+              <div>
+                {" "}
+                <b>test name</b>
+              </div>
             </div>
             <p>
-              I've had mixed experiences with home service providers in the
-              past, so I was pleasantly surprised by the professionalism and
-              expertise of the handyman I found through [Platform Name]. He
-              arrived on time, completed the job quickly, and even offered
-              helpful tips for future maintenance. Thank you for exceeding my
-              expectations!
+              Ayant eu des expériences mitigées avec les prestataires de
+              services à domicile par le passé, j'ai été agréablement surpris
+              par le professionnalisme et l'expertise du bricoleur que j'ai
+              découvert grâce à la plateforme ProCell. Il est arrivé à l'heure
+              convenue, a accompli le travail de manière efficace et a même
+              offert des conseils utiles pour l'entretien à venir. Merci d'avoir
+              largement dépassé mes attentes !
             </p>
           </div>
         </div>
