@@ -19,6 +19,8 @@ import AboutUs from "./components/AboutUs";
 import Demandes from "./components/admin/Demandes";
 import Filtreduser from "./components/User/Filtreduser";
 import ContactPatron from "./components/ContactPatron";
+import Success from "./components/Success";
+import Fail from "./components/Fail";
 
 function App() {
   const adminprivate = useSelector((state) => state.admin.value);
@@ -78,6 +80,8 @@ function App() {
             </ProtectedRouteadmin>
           }
         />
+        <Route path="/success" element={<Success />} />
+        <Route path="/fail" element={<Fail />} />
       </Routes>
     </div>
   );

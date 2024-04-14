@@ -14,6 +14,7 @@ import verifyToken from "../middleware/isAuth.js";
 import feedback from "../models/feedback.js";
 import nodemailer from "nodemailer";
 import bodyParser from "body-parser";
+import Subscription from "../models/Subscription.js";
 
 router.use(bodyParser.urlencoded({ extended: true }));
 router.use(express.json());
@@ -79,24 +80,24 @@ router.post("/loginuser", userloginrules(), validation, async (req, res) => {
 
   try {
     const useremail = await user.findOne({ email });
-    if (!useremail.email) {
-      return res.status(400).send({ msg: "bad credential" });
-    }
     const comparedpassword = await bcrypt.compare(password, useremail.password);
 
-    if (!comparedpassword) {
+    if (!useremail.email) {
       return res.status(400).send({ msg: "bad credential" });
+    } else if (!comparedpassword) {
+      return res.status(400).send({ msg: "bad credential" });
+    } else {
+      const tokenuser = await jwt.sign(
+        { _id: useremail._id },
+        process.env.SECRET_KEY,
+        { expiresIn: 36000 }
+      );
+      res.status(200).send({
+        msg: "login user successfully",
+        Response: useremail,
+        tokenuser,
+      });
     }
-    const tokenuser = await jwt.sign(
-      { _id: useremail._id },
-      process.env.SECRET_KEY,
-      { expiresIn: 36000 }
-    );
-    return res.status(200).send({
-      msg: "login user successfully",
-      Response: useremail,
-      tokenuser,
-    });
   } catch (error) {
     res.status(500).send({ msg: "login user failed", Response: error });
   }
@@ -239,6 +240,45 @@ router.post("/send-mail", async (req, res) => {
       res.status(200).send({ msg: "email sendes to " + to, Response: info });
     }
   });
+});
+
+router.post("/subscribe", async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const exist = await Subscription.findOne({ userId: userId });
+    if (exist) {
+      res.status(400).send({
+        msg: "votre abonnement est en cours tu ne peut pas renouveler maintenant",
+      });
+    } else {
+      const newsubscription = new Subscription({
+        userId,
+        amount: 10000,
+        startDate: new Date(),
+        endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+        status: "active",
+      });
+      await newsubscription.save();
+      res.status(200).json({ message: "Subscription successful" });
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(500).send({ msg: "failed subscription", Response: error });
+  }
+});
+
+router.post("/checkabonn", async (req, res) => {
+  const { userId } = req.body;
+  try {
+    const checkit = await Subscription.findOne({ userId });
+    if (checkit) {
+      res.status(200).send({ msg: "abonnée" });
+    } else {
+      res.status(400).send({ msg: "not abonnée" });
+    }
+  } catch (error) {
+    res.status(500).send({ msg: "failed check", Response: error });
+  }
 });
 
 export default router;

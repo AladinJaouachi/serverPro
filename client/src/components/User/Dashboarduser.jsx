@@ -88,10 +88,53 @@ const Dashboarduser = () => {
     }
   };
 
+  const checkabonnement = async () => {
+    const qq = await localStorage.getItem("iduser");
+    try {
+      const response = await fetch("http://localhost:3001/user/checkabonn", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: qq }),
+      });
+      const data = await response.json();
+      console.log(data);
+      if (response.status === 200) {
+        console.log("abonnée");
+
+        // dispatch(changeStateUser(false));
+      } else {
+        const redirecting = async () => {
+          try {
+            const responseA = await fetch("http://localhost:3001/api/payer", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+            });
+            const data = await responseA.json();
+            alert(
+              "le compte n'est pas autorisé à aucune abonnement il faut abonner d'abord"
+            );
+
+            window.location.href = data.result.link;
+          } catch (error) {
+            console.log(error);
+          }
+        };
+        redirecting();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getpubs();
     checkingtoken();
     getuser();
+    checkabonnement();
   }, []);
 
   const handlechange = (req, res) => {

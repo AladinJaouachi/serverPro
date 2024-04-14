@@ -10,6 +10,7 @@ import userroute from "./routes/userroutes.js";
 import pubroutes from "./routes/pubroutes.js";
 import feedsroutes from "./routes/feedroutes.js";
 import bodyParser from "body-parser";
+import paymentapi from "./routes/Payment.js";
 
 const app = express();
 dotenv.config();
@@ -35,6 +36,8 @@ app.use("/admin", adminroutes);
 app.use("/user", userroute);
 app.use("/pubs", pubroutes);
 app.use("/feeds", feedsroutes);
+app.use("/api", paymentapi);
+
 //
 
 // server run

@@ -37,7 +37,7 @@ const Loginuser = () => {
         const t = await localStorage.getItem("isuser");
         if (t === "true") {
           dispatch(changeStateUser(true));
-          navigator("/Dashboarduser");
+          navigator("/dashboarduser");
         } else {
           console.log("comte n'est activé par l'administrateur");
           alert("compte n'est activé par l'administrateur");
