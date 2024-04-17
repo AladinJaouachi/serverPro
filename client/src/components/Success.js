@@ -2,7 +2,7 @@ import { useEffect } from "react";
 
 const Success = () => {
   const id = localStorage.getItem("iduser");
-  console.log(id);
+
   const createabonn = async () => {
     try {
       const response = await fetch("http://localhost:3001/user/subscribe", {
@@ -13,7 +13,7 @@ const Success = () => {
         body: JSON.stringify({ userId: id }),
       });
       const data = await response.json();
-      console.log(data);
+
       if (response.status === 200) {
         alert("abonnemet activé avec succées");
         window.location.href = "/Dashboarduser";

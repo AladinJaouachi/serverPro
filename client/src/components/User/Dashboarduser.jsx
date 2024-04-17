@@ -42,6 +42,8 @@ const Dashboarduser = () => {
     }
   };
   // end
+
+  // get user coordonées
   const [myuser, setmyuser] = useState("");
   const getuser = async (e) => {
     try {
@@ -63,6 +65,7 @@ const Dashboarduser = () => {
     }
   };
 
+  // check token validation
   const checkingtoken = async (e) => {
     try {
       const token = await localStorage.getItem("tokenuser");
@@ -88,6 +91,7 @@ const Dashboarduser = () => {
     }
   };
 
+  // check abonnement existing
   const checkabonnement = async () => {
     const qq = await localStorage.getItem("iduser");
     try {
@@ -140,8 +144,12 @@ const Dashboarduser = () => {
   const handlechange = (req, res) => {
     setupdateduser({ ...updateduser, [req.target.id]: req.target.value });
   };
+
   const [updateduser, setupdateduser] = useState({});
   const updateuser = async (e) => {
+    const formData = new FormData();
+    formData.append("image", updateduser.image);
+    console.log(formData);
     try {
       const myid = await localStorage.getItem("iduser");
       const response = await fetch(`http://localhost:3001/user/${myid}`, {
@@ -172,6 +180,8 @@ const Dashboarduser = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+
+  //
 
   return (
     <div>
