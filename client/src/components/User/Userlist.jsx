@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../../css/Userlist.css";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const Userlist = () => {
   const [users, setusers] = useState("");
@@ -26,6 +28,9 @@ const Userlist = () => {
   });
   return (
     <div className="userlist">
+      <button className="house" onClick={() => (window.location.href = "/")}>
+        <FontAwesomeIcon icon={faHouse} />
+      </button>
       <p>Liste des Services </p>
       <input
         type="text"

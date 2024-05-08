@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 const router = express.Router();
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
@@ -35,7 +35,6 @@ router.post(
       age,
       place,
       phone,
-      gender,
     } = req.body;
     try {
       const finduser = await user.findOne({ email: email });
@@ -54,7 +53,6 @@ router.post(
           age,
           place,
           phone,
-          gender,
         });
         const saveduser = await newuser.save();
         const token = await jwt.sign(
@@ -149,7 +147,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// other path
+// other path (adding avis to user)
 router.post("/do/:id", avissend(), validation, async (req, res) => {
   try {
     const userId = req.params.id;
@@ -179,7 +177,7 @@ router.post("/do/:id", avissend(), validation, async (req, res) => {
 // ce
 router.get("/", async (req, res) => {
   try {
-    const allofusers = await user.find({ isUser: true });
+    const allofusers = await user.find({ isactivate: true });
     allofusers
       ? res.status(200).send({ msg: " nejem yjib", Response: allofusers })
       : res.status(400).send({ msg: "no users" });
@@ -234,7 +232,8 @@ router.post("/send-mail", async (req, res) => {
   transporter.sendMail(mailOptions, (err, info) => {
     if (err) {
       console.log("error sending mail");
-      res.status(500).send({ msg: "failed send", Response: err });
+      console.log(err);
+      res.status(400).send({ msg: "failed send", Response: err });
     } else {
       console.log("email sended successfully");
       res.status(200).send({ msg: "email sendes to " + to, Response: info });
@@ -252,7 +251,7 @@ router.post("/subscribe", async (req, res) => {
       });
     } else {
       const newsubscription = new Subscription({
-        userId,
+        userId: req.body.userId,
         amount: 10000,
         startDate: new Date(),
         endDate: new Date(new Date().setMonth(new Date().getMonth() + 1)),
@@ -280,5 +279,28 @@ router.post("/checkabonn", async (req, res) => {
     res.status(500).send({ msg: "failed check", Response: error });
   }
 });
+
+// get abonnement
+
+// desactivale users
+router.post("/desactivatethem", async (req, res) => {
+  try {
+    const todesactive = await Subscription.find({
+      endDate: { $lt: new Date() },
+    });
+    if (todesactive.length > 0) {
+      const updates = todesactive.map(async (item) => {
+        await user.updateOne({ _id: item.userId }, { isactivate: false });
+      });
+      await Promise.all(updates); // Wait for all updates to finish
+      res.status(200).send({ msg: "Deactivation complete" });
+    } else {
+      res.status(400).send({ msg: "No subscriptions to deactivate" });
+    }
+  } catch (error) {
+    res.status(500).send({ msg: "Failed to deactivate subscriptions", error });
+  }
+});
+//
 
 export default router;

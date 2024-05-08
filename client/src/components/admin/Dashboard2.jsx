@@ -68,7 +68,7 @@ const Dashboard2 = () => {
               <Nav.Link className="naviget" href="/ContactPatron">
                 Contacter patron
               </Nav.Link>
-              <Nav.Link className="naviget" href="#">
+              <Nav.Link className="naviget" href="/Abonnements">
                 Abonnements
               </Nav.Link>
               <Nav.Link className="naviget" href="/Demandes">

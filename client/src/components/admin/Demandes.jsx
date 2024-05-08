@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../../css/Feedbacks.css";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const Demandes = () => {
   const [allfeeds, setallfeeds] = useState("");
@@ -28,10 +31,13 @@ const Demandes = () => {
     isUser: true,
   });
 
-  console.log(isuser);
-
   return (
     <div>
+      <Link to={"/Dashboardadmin"}>
+        <button className="house">
+          <FontAwesomeIcon icon={faHouse} />
+        </button>
+      </Link>
       <p>Tous les demandes </p>
       <div className="feeds">
         {allfeeds ? (
@@ -50,6 +56,7 @@ const Demandes = () => {
                 <button
                   className="lawla"
                   onClick={async (e) => {
+                    e.target.textContent = "Attendez...";
                     try {
                       const response = await fetch(
                         `http://localhost:3001/user/${el._id}`,
@@ -62,10 +69,8 @@ const Demandes = () => {
                         }
                       );
 
-                      const data = await response.json();
+                      await response.json();
                       if (response.status === 200) {
-                        console.log("user activate");
-                        console.log("compte activé");
                         const sendit = async (e) => {
                           try {
                             const response = await fetch(
@@ -82,21 +87,20 @@ const Demandes = () => {
                                 }),
                               }
                             );
-                            console.log(response.body);
-                            const data = await response.json();
-                            console.log(data);
+
+                            await response.json();
+
                             if (response.status === 200) {
-                              alert("compte activé et mail envoyé");
+                              alert("compte activé et email envoyé");
                               window.location.reload();
                             } else {
-                              console.log("failed send mail");
+                              alert("erreur d'envoie d'email");
                             }
                           } catch (error) {
                             console.log("failed send mail");
                           }
                         };
 
-                        // window.location.reload();
                         sendit();
                       } else {
                         console.log("failed");
@@ -120,7 +124,7 @@ const Demandes = () => {
                         },
                       }
                     );
-                    const data = await response.json();
+                    await response.json();
                     if (response.status === 200) {
                       const sendrefusé = async () => {
                         try {
@@ -138,8 +142,8 @@ const Demandes = () => {
                               }),
                             }
                           );
-                          const data = await response.json();
-                          console.log(data);
+                          await response.json();
+
                           if (response.status === 200) {
                             alert("compte refusé et mail envoyé");
                             window.location.reload();

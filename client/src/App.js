@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Route, Routes } from "react-router-dom";
@@ -21,6 +21,8 @@ import Filtreduser from "./components/User/Filtreduser";
 import ContactPatron from "./components/ContactPatron";
 import Success from "./components/Success";
 import Fail from "./components/Fail";
+import Abonnements from "./components/User/Abonnements";
+import Confirmationdialog from "./components/admin/Confirmationdialog";
 
 function App() {
   const adminprivate = useSelector((state) => state.admin.value);
@@ -29,6 +31,50 @@ function App() {
   console.log("adminprivate is :", adminprivate);
   console.log("userprivate is ", userPrivate);
   const [personnalise, setpersonnalise] = useState("");
+
+  const desactivateuser = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/user/desactivatethem`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      await response.json();
+      if (response.status === 200) {
+        console.log("users desactivated");
+        checkvalidationabonnement();
+      } else {
+        console.log("user not desactivated");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkvalidationabonnement = async () => {
+    try {
+      const response = await fetch("http://localhost:3001/api/checkingit", {
+        method: "POST",
+      });
+      await response.json();
+      if (response.status === 200) {
+        console.log("expired abonnements deleted");
+      } else {
+        console.log("no subscriptions to delete or less than now");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    desactivateuser();
+  }, []);
+
   return (
     <div className="App">
       <Routes>
@@ -82,6 +128,15 @@ function App() {
         />
         <Route path="/success" element={<Success />} />
         <Route path="/fail" element={<Fail />} />
+        <Route
+          path="/Abonnements"
+          element={
+            <ProtectedRouteadmin isAllowed={adminprivate}>
+              <Abonnements />
+            </ProtectedRouteadmin>
+          }
+        />
+        <Route path="/confirmation" element={<Confirmationdialog />} />
       </Routes>
     </div>
   );

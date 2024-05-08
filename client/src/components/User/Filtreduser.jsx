@@ -1,3 +1,5 @@
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 
@@ -33,9 +35,12 @@ const Filtreduser = () => {
   const hethom = userfiltred.filter((user) =>
     user.specialité.toLowerCase().includes(param.service)
   );
-  console.log(hethom);
+
   return (
     <div>
+      <button className="house" onClick={() => (window.location.href = "/")}>
+        <FontAwesomeIcon icon={faHouse} />
+      </button>
       <center>
         <h1>Nos {param.service}s</h1>
       </center>

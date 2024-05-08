@@ -1,3 +1,5 @@
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 
 const News = () => {
@@ -18,10 +20,13 @@ const News = () => {
   }, []);
   return (
     <div className="news">
+      <button className="house" onClick={() => (window.location.href = "/")}>
+        <FontAwesomeIcon icon={faHouse} />
+      </button>
       <center>
         <h5>Nouveautés</h5>
       </center>
-      <div className="fatherchildren">
+      <div className="parme">
         {" "}
         {pubs &&
           pubs.map((pub) => {

@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../../css/Loginadmin.css";
 import { changestateadmin } from "../../Redux/slice/Adminslice";
 import { useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -32,7 +34,6 @@ const Login = () => {
         dispatch(changestateadmin(true));
 
         console.log("login success");
-        console.log(data);
 
         navigator("/Dashboardadmin");
       } else {
@@ -49,54 +50,63 @@ const Login = () => {
   };
 
   return (
-    <div className="loginadmin">
-      <div className="loginformchild">
-        <div className="entete">login Admin</div>
-        <div className="group">
-          <label htmlFor="user" className="label">
-            email
-          </label>
-          <input
-            id="email"
-            type="text"
-            className="input"
-            autoComplete="off"
-            placeholder="example@gmail.com"
-            onChange={handlechange}
-          />
+    <>
+      <Link to={"/"}>
+        <button className="house">
+          <FontAwesomeIcon icon={faHouse} />
+        </button>
+      </Link>
+      <div className="loginadmin">
+        <div className="loginformchild">
+          <div className="entete">connexion administrateur</div>
+          <div className="group">
+            <label htmlFor="user" className="label">
+              email
+            </label>
+            <input
+              id="email"
+              type="text"
+              className="input"
+              autoComplete="off"
+              placeholder="example@gmail.com"
+              onChange={handlechange}
+            />
+          </div>
+          <div className="group">
+            <label htmlFor="pass" className="label">
+              mot de passe
+            </label>
+            <input
+              id="password"
+              type="password"
+              className="input"
+              data-type="password"
+              autoComplete="off"
+              placeholder="********"
+              onChange={handlechange}
+            />
+          </div>
+          <div className="group">
+            <input
+              type="submit"
+              className="button"
+              value="Se connecter"
+              onClick={handlesubmit}
+            />
+          </div>
+          <div className="predefinit">
+            {" "}
+            {errorses &&
+              errorses.map((e, key) => {
+                return <h4 key={key}>{e.msg}</h4>;
+              })}
+          </div>
+          <div className="predefinit">
+            {bad ? null : <h3>Mauvaise qualifications</h3>}
+          </div>
         </div>
-        <div className="group">
-          <label htmlFor="pass" className="label">
-            Password
-          </label>
-          <input
-            id="password"
-            type="password"
-            className="input"
-            data-type="password"
-            autoComplete="off"
-            placeholder="********"
-            onChange={handlechange}
-          />
-        </div>
-        <div className="group">
-          <input
-            type="submit"
-            className="button"
-            value="Sign In"
-            onClick={handlesubmit}
-          />
-        </div>
-        <div className="predefinit">
-          {" "}
-          {errorses &&
-            errorses.map((e, key) => {
-              return <h4 key={key}>{e.msg}</h4>;
-            })}
-        </div>
-        <div className="predefinit">{bad ? null : <h3>bad credential</h3>}</div>
       </div>
-    </div>
+    </>
   );
 };
 

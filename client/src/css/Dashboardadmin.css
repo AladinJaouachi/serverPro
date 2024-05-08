@@ -63,6 +63,7 @@ article {
     box-shadow: 0 0 20px black;
     margin: 1%;
     padding: 1%;
+    text-align: center;
 }
 article a{
     text-decoration: none;

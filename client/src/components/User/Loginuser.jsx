@@ -3,6 +3,8 @@ import "../../css/Loginuser.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { changeStateUser } from "../../Redux/slice/Userslice";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const Loginuser = () => {
   const dispatch = useDispatch();
@@ -42,6 +44,7 @@ const Loginuser = () => {
           console.log("comte n'est activé par l'administrateur");
           alert("compte n'est activé par l'administrateur");
           localStorage.clear();
+          window.location.reload();
         }
       } else {
         console.log(data);
@@ -60,11 +63,16 @@ const Loginuser = () => {
 
   return (
     <>
+      <Link to={"/"}>
+        <button className="house">
+          <FontAwesomeIcon icon={faHouse} />
+        </button>
+      </Link>
       <div className="container">
         <div className="screen">
           <div className="screen__content">
             <form className="loginuser">
-              <h3>login user form</h3>
+              <h3>Connexion du Patron</h3>
               <div className="login__field">
                 <input
                   type="text"
@@ -79,19 +87,19 @@ const Loginuser = () => {
                   type="password"
                   className="login__input"
                   id="password"
-                  placeholder="Password"
+                  placeholder="mot de passe"
                   onChange={handlechange}
                 />
               </div>
               <center>
-                <div>{bad ? null : <h6>bad credential</h6>}</div>
+                <div>{bad ? null : <h6>Mauvaise qualifications</h6>}</div>
               </center>
               <button className="button login__submit" onClick={handlesubmit}>
-                login now
+                Se connecter
               </button>
               <h5>
-                if you don't have account
-                <Link to={"/Registeruser"}>Register now</Link>
+                Si vous n'avez pas de compte{" "}
+                <Link to={"/Registeruser"}>S'inscrire</Link>
               </h5>
             </form>
             <div className="errorses">

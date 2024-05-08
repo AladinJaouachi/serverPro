@@ -6,6 +6,10 @@ const subscriptionSchema = new Schema({
     type: String,
     required: true,
   },
+  libelle: {
+    type: String,
+    default: "Abonnement mensuelle",
+  },
   amount: {
     type: Number,
     required: true,

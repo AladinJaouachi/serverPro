@@ -32,10 +32,7 @@ const userSchema = new Schema({
     type: Number,
     required: true,
   },
-  gender: {
-    type: String,
-    required: true,
-  },
+
   place: {
     type: String,
     required: true,
@@ -47,6 +44,10 @@ const userSchema = new Schema({
   isUser: {
     type: Boolean,
     required: true,
+    default: false,
+  },
+  isactivate: {
+    type: Boolean,
     default: false,
   },
   avis: [

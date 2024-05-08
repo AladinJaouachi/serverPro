@@ -35,3 +35,8 @@
     font-family: 'Courier New', Courier, monospace  ;
     font-weight: bold;
 }
+
+.retour{
+    background-color: rgb(212, 206, 206);
+    width: 10%;
+}

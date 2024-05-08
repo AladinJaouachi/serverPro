@@ -5,13 +5,14 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { changeStateUser } from "../../Redux/slice/Userslice";
 import { changeprofil } from "../../Redux/slice/profil";
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import FooterMyApp from "./../FooterMyApp";
+import logo from "../../images/logo.jpg";
+import axios from "axios";
+import { format } from "date-fns";
 
 const Dashboarduser = () => {
   const dispatch = useDispatch();
@@ -23,9 +24,10 @@ const Dashboarduser = () => {
     dispatch(changeStateUser(false));
 
     navigator("/");
-    alert("logout success ");
+    alert("Deconnexion aves success");
   };
   // end
+
   // get publications
   const getpubs = async (e) => {
     try {
@@ -76,7 +78,7 @@ const Dashboarduser = () => {
           authorization: token,
         },
       });
-      const data = await response.json();
+      await response.json();
       if (response.status === 200) {
         dispatch(changeStateUser(true));
       } else {
@@ -91,7 +93,35 @@ const Dashboarduser = () => {
     }
   };
 
+  // get abonnement
+  const [abonn, setabonn] = useState("");
+  const getabonn = async () => {
+    const userId = await localStorage.getItem("iduser");
+    try {
+      const response = await fetch("http://localhost:3001/api/getabonnement", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: userId }),
+      });
+      const data = await response.json();
+      console.log(data);
+      if (response.status === 200) {
+        setabonn(
+          format(new Date(data.Response.endDate), "dd-MM-yyyy h:mm:ss a")
+        );
+        console.log(abonn);
+      } else {
+        console.log("me femech", data.Response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // check abonnement existing
+  const [paymentlink, setpaymentlink] = useState("");
   const checkabonnement = async () => {
     const qq = await localStorage.getItem("iduser");
     try {
@@ -118,11 +148,11 @@ const Dashboarduser = () => {
               },
             });
             const data = await responseA.json();
-            alert(
-              "le compte n'est pas autorisé à aucune abonnement il faut abonner d'abord"
-            );
+            setpaymentlink(data.result.link);
+            handleShow6(true);
+            console.log(paymentlink);
 
-            window.location.href = data.result.link;
+            // window.location.href = data.result.link;
           } catch (error) {
             console.log(error);
           }
@@ -139,6 +169,7 @@ const Dashboarduser = () => {
     checkingtoken();
     getuser();
     checkabonnement();
+    getabonn();
   }, []);
 
   const handlechange = (req, res) => {
@@ -147,9 +178,6 @@ const Dashboarduser = () => {
 
   const [updateduser, setupdateduser] = useState({});
   const updateuser = async (e) => {
-    const formData = new FormData();
-    formData.append("image", updateduser.image);
-    console.log(formData);
     try {
       const myid = await localStorage.getItem("iduser");
       const response = await fetch(`http://localhost:3001/user/${myid}`, {
@@ -163,11 +191,11 @@ const Dashboarduser = () => {
       if (response.status === 200) {
         console.log("updated success");
         console.log(data);
-        alert("updated successfully");
+        alert("modification avec success");
         window.location.reload();
       } else {
         console.log("failed update");
-        alert("failed update retry again");
+        alert("erreur ressayer ! ");
         localStorage.removeItem("iduser");
         localStorage.removeItem("tokenuser");
         localStorage.removeItem("coordin");
@@ -183,8 +211,82 @@ const Dashboarduser = () => {
 
   //
 
+  // modal 2
+  const [show2, setShow2] = useState(false);
+
+  const handleClose2 = () => setShow2(false);
+  const handleShow2 = () => setShow2(true);
+
+  // upload image
+  const [myimg, setmyimg] = useState(null);
+  const [ready, setready] = useState(false);
+  const uploadimageuser = async () => {
+    const form = new FormData();
+    form.append("file", myimg);
+    form.append("upload_preset", "Aladinjaw");
+
+    if (myimg == null) {
+      updateuser();
+    } else {
+      await axios
+        .post("https://api.cloudinary.com/v1_1/dseusisyl/upload", form)
+        .then(async (result) => {
+          if (result.status === 200) {
+            await setupdateduser({
+              ...updateduser,
+              image: result.data.secure_url,
+            });
+            await setready(true);
+          } else {
+            console.log("error axios");
+          }
+        });
+    }
+  };
+
+  // modal 3 pour les avis
+  const [show3, setShow3] = useState(false);
+
+  const handleClose3 = () => setShow3(false);
+  const handleShow3 = () => setShow3(true);
+
+  //
+  // payer or no abonnement
+  const [show6, setShow6] = useState(false);
+
+  const handleClose6 = () => setShow6(false);
+  const handleShow6 = () => setShow6(true);
+  //
+
   return (
     <div>
+      <div>
+        <Modal
+          show={show6}
+          onHide={handleClose6}
+          backdrop="static"
+          keyboard={false}
+        >
+          <Modal.Header>
+            <Modal.Title>Demande d'abonnement</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Le compte n'a pas d'abonnement il faut abonner pour acceder au
+            profil
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={logout}>
+              Annuler
+            </Button>
+            <Button
+              variant="success"
+              onClick={() => (window.location.href = paymentlink)}
+            >
+              Valider
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
       <div>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
@@ -194,10 +296,10 @@ const Dashboarduser = () => {
             <Form>
               <Form.Group className="mb-3">
                 <Form.Control
-                  type="text"
+                  type="file"
                   id="image"
                   placeholder="image"
-                  onChange={handlechange}
+                  onChange={(e) => setmyimg(e.target.files[0])}
                   autoFocus
                 />
               </Form.Group>
@@ -264,63 +366,91 @@ const Dashboarduser = () => {
                   autoFocus
                 />
               </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  id="gender"
-                  placeholder="Modifier genre"
-                  onChange={handlechange}
-                  autoFocus
-                />
-              </Form.Group>
             </Form>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="danger" onClick={handleClose}>
               Annuler
             </Button>
-            <Button
-              variant="success"
-              onClick={() => {
-                updateuser();
-                handleClose();
-              }}
-            >
-              Enregistrer
-            </Button>
+            {ready ? (
+              <Button onClick={updateuser} variant="success">
+                confirmer
+              </Button>
+            ) : (
+              <Button
+                variant="success"
+                onClick={(e) => {
+                  uploadimageuser();
+                  e.target.textContent = "attendez...";
+                }}
+              >
+                Enregistrer
+              </Button>
+            )}
           </Modal.Footer>
         </Modal>
       </div>
-      <Navbar bg="dark" data-bs-theme="dark">
-        <Container className="container">
-          <Navbar.Brand href="">
-            <img src={logo} alt="" />
-          </Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="">Home</Nav.Link>
-            <Nav.Link href="">about</Nav.Link>
-            <Nav.Link href="">contact us</Nav.Link>
-          </Nav>
-        </Container>
-        <button className="editaccount" onClick={handleShow}>
-          edit account
-        </button>
-        <button className="logoutuser" onClick={logout}>
-          Logout
-        </button>
+      <Navbar bg="dark" data-bs-theme="dark" className="navit">
+        <img src={logo} alt="" />
+
+        <div className="btns1">
+          <button className="consult" onClick={handleShow3}>
+            {" "}
+            consulter avis
+          </button>
+          <button className="consult" onClick={handleShow2}>
+            {" "}
+            consulter abonnement
+          </button>
+        </div>
+
+        <div className="btns2">
+          <button className="editaccount" onClick={handleShow}>
+            modifier profile
+          </button>
+          <button className="logoutuser" onClick={logout}>
+            Deconnexion
+          </button>
+        </div>
       </Navbar>
       <br />
+      <Modal show={show2} onHide={handleClose2}>
+        <Modal.Header closeButton>
+          <Modal.Title>Votre abonnement</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Mr le patron votre abonnement est valide jusqu'a <br />{" "}
+          {abonn && abonn}
+        </Modal.Body>
+      </Modal>
 
+      <div>
+        <Modal show={show3} onHide={handleClose3}>
+          <Modal.Header closeButton>
+            <Modal.Title>Mes avis</Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="themthem">
+            {myuser &&
+              myuser.avis.map((e) => {
+                return (
+                  <div key={e._id} className="them">
+                    <p>De : {e.title}</p>
+                    <p>Avis : {e.description} </p>
+                  </div>
+                );
+              })}
+          </Modal.Body>
+        </Modal>
+      </div>
       <div className="headchild">
         <div className="profiluser">
           <img src={myuser && myuser.image} alt="" />
           <div className="coordonnnes">
-            <h6>firstname : {myuser && myuser.firstname}</h6>
-            <h6>lastname : {myuser && myuser.lastname}</h6>
+            <h6>Nom: {myuser && myuser.firstname}</h6>
+            <h6>Prenom : {myuser && myuser.lastname}</h6>
             <h6>specialité : {myuser && myuser.specialité}</h6>
             <h6>age : {myuser && myuser.age}</h6>
-            <h6>phone : {myuser && myuser.phone} </h6>
-            <h6>gender : {myuser && myuser.gender}</h6>
+            <h6>Telephone : {myuser && myuser.phone} </h6>
             <h6>place : {myuser && myuser.place}</h6>
           </div>
         </div>
@@ -328,16 +458,19 @@ const Dashboarduser = () => {
       </div>
 
       <div className="fatherchildren">
-        <h2>publications</h2>{" "}
+        <h3>publications</h3>
         <div className="petitchild">
           {pubs.length > 0 &&
             pubs.map((pub) => {
               return (
                 <div key={pub._id} className="children">
-                  <p>from : {pub.fromwho}</p>
-                  <p>added in : {pub.pubdate} </p>
+                  <p>De : {pub.fromwho}</p>
+                  <p>
+                    Publié le :{" "}
+                    {format(new Date(pub.pubdate), "dd-MM-yyyy h:mm:ss a")}{" "}
+                  </p>
                   <hr width="90%" />
-                  <img src={pub && pub.image1} alt="" />
+                  <img src={pub.image1} alt="" />
                   <p>{pub.title} </p>
                   <p>{pub.content} </p>
 

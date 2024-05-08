@@ -81,13 +81,13 @@ const HomePage = () => {
               <Dropdown.Item>
                 <button>
                   {" "}
-                  <Link to={"/Loginadmin"}> interface admin </Link>{" "}
+                  <Link to={"/Loginadmin"}> interface Admin </Link>{" "}
                 </button>
               </Dropdown.Item>
               <Dropdown.Item>
                 <button>
                   {" "}
-                  <Link to={"/loginuser"}> interface personnel</Link>{" "}
+                  <Link to={"/loginuser"}> interface Patron</Link>{" "}
                 </button>
               </Dropdown.Item>
             </Dropdown.Menu>

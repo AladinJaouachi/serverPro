@@ -1,52 +1,51 @@
 import { check, validationResult } from "express-validator";
 
 export const adminregisterrules = () => [
-  check("email", "enter a valid email").isEmail(),
-  check("email", "email is required").notEmpty(),
-  check("password", "enter a valid password").isLength({
+  check("email", "entrer un email valide").isEmail(),
+  check("email", "email est obligatoire").notEmpty(),
+  check("password", "entrer un valide mot de passe").isLength({
     min: 8,
     max: 20,
   }),
 
-  check("password", "password is required").notEmpty(),
+  check("password", "mot de passe est obligatoire").notEmpty(),
 ];
 
 export const adminloginrules = () => [
-  check("email", "enter a valid email").isEmail(),
-  check("email", "email is required").notEmpty(),
-  check("password", "enter a valid password").isLength({
+  check("email", "entrer un email valide").isEmail(),
+  check("email", "email est obligatoire").notEmpty(),
+  check("password", "entrer une valide mot de passe").isLength({
     min: 8,
     max: 20,
   }),
 
-  check("password", "password is required").notEmpty(),
+  check("password", "mot de passe est obligatoire").notEmpty(),
 ];
 
 export const userloginrules = () => [
-  check("email", "enter a valid email").isEmail(),
-  check("email", "email is required").notEmpty(),
-  check("password", "enter a valid password").isLength({
+  check("email", "entrer un email valide").isEmail(),
+  check("email", "email est obligatoire").notEmpty(),
+  check("password", "entrer une valide mot de passe").isLength({
     min: 8,
     max: 20,
   }),
 
-  check("password", "password is required").notEmpty(),
+  check("password", "mot de passe est obligatoire").notEmpty(),
 ];
 
 export const userregisterrules = () => [
-  check("email", "enter a valid email").isEmail(),
-  check("email", "email is required").notEmpty(),
-  check("password", "enter a valid password").isLength({
+  check("email", "entrer un email valide").isEmail(),
+  check("email", "email est obligatoire").notEmpty(),
+  check("password", "entrer une valide mot de passe").isLength({
     min: 8,
     max: 20,
   }),
 
-  check("password", "password is required").notEmpty(),
-  check("firstname", "firstname is required").notEmpty(),
-  check("lastname", "lastname is required").notEmpty(),
-  check("gender", "gender is required").notEmpty(),
-  check("age", "age is required").notEmpty(),
-  check("specialité", "specialité is required").notEmpty(),
+  check("password", "mot de passe est obligatoire").notEmpty(),
+  check("firstname", "Le nom est obligatoire").notEmpty(),
+  check("lastname", "Le prenom est obligatoire").notEmpty(),
+  check("age", "L'age est obligatoire").notEmpty(),
+  check("specialité", "La specialité est obligatoire").notEmpty(),
 ];
 
 export const nouvellepubrules = () => [

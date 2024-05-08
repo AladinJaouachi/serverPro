@@ -1,0 +1,27 @@
+.abonnements{
+
+    display: flex;
+   flex-wrap: wrap;
+    width: 50%;
+    margin: 2% 25%;
+}
+
+.abonnchild{
+    width: 100%;
+    background-color: rgb(233, 227, 227);
+    margin: 2% auto;
+    border: 2px solid black;
+    padding: 1%;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    box-shadow: 0 0 10px red;
+}
+
+.fatherabonements h4,h5{
+    color: black;
+    display: block;
+    text-align: center;
+}

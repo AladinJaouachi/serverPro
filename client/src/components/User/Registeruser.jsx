@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import "../../css/Registeruser.css";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const Registeruser = () => {
   const navigator = useNavigate();
@@ -49,6 +51,11 @@ const Registeruser = () => {
 
   return (
     <div className="father">
+      <Link to={"/"}>
+        <button className="house">
+          <FontAwesomeIcon icon={faHouse} />
+        </button>
+      </Link>
       <div className="form-body">
         <div className="row">
           <div className="form-holder">
@@ -126,17 +133,7 @@ const Registeruser = () => {
                       onChange={handlechange}
                     />
                   </div>
-                  <div>
-                    <select
-                      id="gender"
-                      placeholder="Genre"
-                      onChange={handlechange}
-                    >
-                      <option value="">Genre</option>
-                      <option value="male">male</option>
-                      <option value="female">female</option>
-                    </select>
-                  </div>
+
                   <div className="col-md-12">
                     <input
                       className="form-control"
@@ -149,7 +146,7 @@ const Registeruser = () => {
                   </div>
                   <div className="form-button mt-3">
                     <button id="submit" type="submit" onClick={handlesubmit}>
-                      S'inscrire
+                      S'inscrire maintenant
                     </button>
 
                     <center>

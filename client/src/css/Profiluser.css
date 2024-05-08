@@ -9,13 +9,11 @@
 }
 .myuser img{
     width: 25%;
+    height: 150px;
     margin: 1% auto;
-    border-radius: 50%;
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    -ms-border-radius: 50%;
-    -o-border-radius: 50%;
+   
     border: 2px solid black;
+    box-shadow:0 0 10px black;
 }
 .myuser h4{
     color: black;
@@ -24,8 +22,9 @@
 
 .myuser Button{
     width: 25%;
-    height: 40px;
-    color: red;
+    height: 55px;
+    color: white;
+   
     border: 2px solid red;
     font-weight: bold;
     border-radius: 5px;

@@ -1,36 +1,40 @@
 import React, { useEffect, useState } from "react";
 import "../../css/Profiluser.css";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 const ProfilUser = () => {
   const navigator = useNavigate();
   const [getstat, setgetstat] = useState("");
-
   const url = useParams().id;
   const token = localStorage.getItem("token");
 
+  // search one user
   const searchoneuser = async (e) => {
     try {
-      const response = await fetch("http://localhost:3001/user/" + url, {
+      const response = await fetch(`http://localhost:3001/user/${url}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await response.json();
+
       if (response.status === 200) {
         await setgetstat(data.Response);
-        handleChange(data.Response.email);
+        await settosend({ ...tosend, to: `${data.Response.email}` });
       }
-      console.log(getstat.avis);
     } catch (error) {
       console.log(error);
     }
   };
+  //
 
+  // delete one user
   const deleteuser = async () => {
     try {
       const response = await fetch("http://localhost:3001/user/" + url, {
@@ -39,41 +43,53 @@ const ProfilUser = () => {
           "Content-Type": "application/json",
         },
       });
-      const data = await response.json();
+      response.json();
       if (response.status === 200) {
         alert("utilisateur supprimé");
+        deleteabonnement();
+        sendmailfordeleted();
+
         navigator("/Dashboardadmin");
       } else {
-        alert("suppression echoué ");
+        alert("suppression du compte echoué ");
       }
     } catch (error) {
       console.log(error);
     }
   };
+  //
 
   useEffect(() => {
     searchoneuser();
   }, []);
 
+  // state d'avis user
   const [avisuser, setavisuser] = useState({
     title: "",
     description: "",
   });
 
+  //
+
+  // function to change the title of avis
   const handleTitleChange = (event) => {
     setavisuser({
       ...avisuser,
       title: event.target.value,
     });
   };
+  //
 
+  // function to change the description of avis
   const handleDescriptionChange = (event) => {
     setavisuser({
       ...avisuser,
       description: event.target.value,
     });
   };
+  //
 
+  // function to send avis
   const handlesend = async (e) => {
     try {
       const response = await fetch("http://localhost:3001/user/do/" + url, {
@@ -83,49 +99,44 @@ const ProfilUser = () => {
         },
         body: JSON.stringify(avisuser),
       });
-      const data = await response.json();
+      await response.json();
       if (response.status === 200) {
         alert("Message envoyé");
-        console.log(data);
+        window.location.reload();
       } else {
-        alert("modified failed , retry again ! ");
+        alert("Erreur ressayer ! ");
       }
     } catch (error) {
       console.log(error);
     }
   };
+  //
 
+  // modal 1 params
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  //
 
-  const [modifp, setmodifpas] = useState({});
-  const handlechangepass = (event) => {
-    setmodifpas({
-      ...modifp,
-      password: event.target.value,
-    });
-  };
+  // state to send mail
 
   const [tosend, settosend] = useState({
     to: "",
     subject: "update password",
     text: "",
   });
-  function handleChange(event) {
+  //
+
+  // function to set the password to send in the state
+  const handlechangepass = (event) => {
     settosend({
       ...tosend,
-      to: event,
+      text: event,
     });
-  }
+  };
+  //
 
-  function handleChange1(event1) {
-    settosend({
-      ...tosend,
-      text: event1,
-    });
-  }
-
+  // function to send email of updates
   const sendmail = async () => {
     try {
       const response = await fetch(`http://localhost:3001/user/send-mail`, {
@@ -143,7 +154,6 @@ const ProfilUser = () => {
       if (response.status === 200) {
         console.log("mail sent");
         alert("mot de passe a été change et l'email envoyé");
-        console.log(response);
         window.location.reload();
       } else {
         console.log("mail not sent");
@@ -152,6 +162,37 @@ const ProfilUser = () => {
       console.log(error);
     }
   };
+  //
+  // send mail for deleted profil
+  const sendmailfordeleted = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/user/send-mail`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: await JSON.stringify({
+          to: tosend.to,
+          subject: "Suppression du compte service",
+          text: "Mr votre compte de service a été supprimé par l'administrateur du plateform car votre service n'est ni aimé ni accepté par ceux qui recherchent des services",
+        }),
+      });
+
+      if (response.status === 200) {
+        console.log("mail sent");
+        alert("email de suppression a été envoyé");
+        window.location.reload();
+      } else {
+        console.log("mail not sent");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //
+  // modification du password
+  const [modifp, setmodifp] = useState();
 
   const modifpass = async (e) => {
     try {
@@ -162,17 +203,14 @@ const ProfilUser = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: await JSON.stringify(modifp),
+          body: await JSON.stringify({ password: modifp }),
         }
       );
 
       const data = await response.json();
-      console.log("hethi data", data);
       if (response.status === 200) {
-        handleChange1(modifp.password);
-        console.log(handleChange1);
         console.log("tbedel");
-        console.log("new pass", data);
+
         await sendmail();
       } else {
         alert("modified failed , retry again ! ");
@@ -184,8 +222,44 @@ const ProfilUser = () => {
     }
   };
 
+  //
+
+  // delete abonnement
+  const deleteabonnement = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/${url}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      await response.json();
+      if (response.status === 200) {
+      } else {
+        alert("il n'y a pas d'abonnement à supprimer ");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //
+
   return (
     <div>
+      {token ? (
+        <Link to={"/Dashboardadmin"}>
+          <button className="house">
+            <FontAwesomeIcon icon={faHouse} />
+          </button>
+        </Link>
+      ) : (
+        <Link to={"/"}>
+          <button className="house">
+            <FontAwesomeIcon icon={faHouse} />
+          </button>
+        </Link>
+      )}
       <div className="myuser">
         <img src={getstat.image} alt="" />
         <h4>Nom: {getstat.firstname} </h4>
@@ -194,23 +268,25 @@ const ProfilUser = () => {
         <hr />
         <h4>Email : {getstat.email} </h4>
         <h4>Numero de Tel : {getstat.phone} </h4>
-        <h4>genre : {getstat.gender} </h4>
         <h4>adresse : {getstat.place} </h4>
         <h4>age : {getstat.age} </h4>
 
         {token && (
           <input
             type="text"
-            placeholder="modifier mdp :"
-            onChange={handlechangepass}
+            placeholder="nouveau mot de passe :"
+            onChange={(e) => {
+              handlechangepass(e.target.value);
+              setmodifp(e.target.value);
+            }}
           />
         )}
         {token && (
-          <Button variant="primary" onClick={modifpass}>
-            changer mdp
+          <Button variant="secondary" onClick={modifpass} disabled={!modifp}>
+            changer mot de passe
           </Button>
         )}
-        {token && <Button onClick={deleteuser}>supprimer compte </Button>}
+        {token && <Button onDoubleClick={deleteuser}>supprimer compte </Button>}
 
         {!token && (
           <Button variant="primary" onClick={handleShow}>
@@ -279,7 +355,7 @@ const ProfilUser = () => {
                     <p> {item.description} </p>
                   </div>
                   {token && (
-                    <button
+                    <Button
                       onClick={async () => {
                         console.log(url);
                         console.log(item._id);
@@ -310,7 +386,7 @@ const ProfilUser = () => {
                     >
                       {" "}
                       X{" "}
-                    </button>
+                    </Button>
                   )}
                 </div>
               );
